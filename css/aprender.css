@@ -90,16 +90,13 @@
 .learn-card.earth::before  { background: var(--earth-600); }
 
 .learn-card:hover {
-    transform: translateY(-2px);
+    transform: translateY(-4px) scale(1.02);
     box-shadow: var(--shadow-md);
     border-color: var(--green-300);
 }
-.learn-card.green:hover {
-    transform: translateY(-2px) scale(1.04);
-}
-.learn-card:active { transform: translateY(0); }
-.learn-card.green:active {
-    transform: translateY(0) scale(.98);
+
+.learn-card:active { 
+    transform: translateY(0) scale(0.97); 
     box-shadow: var(--shadow-sm);
 }
 

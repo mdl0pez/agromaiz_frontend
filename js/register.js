@@ -40,23 +40,37 @@ document.addEventListener('DOMContentLoaded', () => {
     if (err) err.textContent = mensaje;
   }
 
-  // Indicador de fortaleza de contraseña
+  document.getElementById('toggleRegPass').addEventListener('click', function() {
+    const passwordInput = document.getElementById('regPassword');
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    
+    // Opcional: cambiar el icono según el estado
+    this.textContent = type === 'password' ? '👁️' : '🙈';
+});
+
+  // Indicador de fortaleza de contraseña corregido
   if (passEl) {
     passEl.addEventListener('input', () => {
       const val = passEl.value;
-      const indicador = document.getElementById('passStrength');
-      if (!indicador) return;
+      const fill = document.getElementById('strengthFill'); // ID real del HTML
+      const text = document.getElementById('strengthText'); // ID real del HTML
+      if (!fill || !text) return;
 
       let fuerza = 0;
-      if (val.length >= 8)          fuerza++;
-      if (/[A-Z]/.test(val))        fuerza++;
-      if (/[0-9]/.test(val))        fuerza++;
+      if (val.length >= 8) fuerza++;
+      if (/[A-Z]/.test(val)) fuerza++;
+      if (/[0-9]/.test(val)) fuerza++;
       if (/[^A-Za-z0-9]/.test(val)) fuerza++;
 
       const niveles = ['', 'Débil', 'Regular', 'Buena', 'Fuerte'];
       const colores = ['', '#e53e3e', '#dd6b20', '#d69e2e', '#38a169'];
-      indicador.textContent = fuerza > 0 ? niveles[fuerza] : '';
-      indicador.style.color = colores[fuerza];
+      const anchos = ['0%', '25%', '50%', '75%', '100%'];
+
+      text.textContent = fuerza > 0 ? niveles[fuerza] : '';
+      text.style.color = colores[fuerza];
+      fill.style.width = anchos[fuerza]; // Animamos el ancho de la barra
+      fill.style.backgroundColor = colores[fuerza];
     });
   }
 
