@@ -7,7 +7,7 @@
    <script src="../js/api.js"></script>
    ============================================================ */
 
-const API_BASE = 'http://localhost:3000/api'; // Cambiar en producción
+const API_BASE = 'https://agromaizbackend-production.up.railway.app/api'; // Cambiar en producción
 
 /* ──────────────────────────────────────────────────────────
    GESTIÓN DE TOKENS
