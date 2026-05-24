@@ -48,6 +48,7 @@
     display: flex;
     flex-direction: column;
     gap: .85rem;
+    pointer-events: auto; /* Asegura que la cuadrícula siempre reciba clics */
 }
 
 .learn-card {
@@ -69,6 +70,8 @@
     opacity: 0;
     transform: translateY(18px);
     animation: slideUp .4s ease forwards;
+    pointer-events: auto; /* Fuerza la reactividad */
+    animation-fill-mode: forwards; /* Asegura que se quede en el estado final */
 }
 
 .learn-card:nth-child(1) { animation-delay: .05s; }
