@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uso del Fertilizante — AgroMaíz</title>
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/app.css" />
+  <link rel="stylesheet" href="../css/aprender.css" />
+  <style>
+    .fertilizante-selector {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .6rem;
+      margin-bottom: .75rem;
+    }
+    .fert-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .4rem;
+      padding: .85rem .5rem;
+      background: var(--surface);
+      border: 2px solid var(--divider);
+      border-radius: 14px;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: center;
+    }
+    .fert-item:hover, .fert-item.active {
+      border-color: var(--amber-500);
+      background: var(--amber-100);
+    }
+    .fert-item .fert-emoji { font-size: 1.8rem; }
+    .fert-item .fert-nombre { font-size: .75rem; font-weight: 700; color: var(--text-primary); }
+    .fert-item .fert-tag   { font-size: .65rem; color: var(--text-secondary); }
+    .fert-info-panel {
+      background: var(--card-bg);
+      border: 1px solid var(--amber-500);
+      border-radius: 14px;
+      padding: 1rem;
+      display: none;
+    }
+    .fert-info-panel.visible { display: block; }
+    .fert-info-panel h4 { font-size:.95rem; font-weight:700; color:var(--text-primary); margin-bottom:.5rem; }
+    .fert-dosis-table { width:100%; border-collapse:collapse; font-size:.78rem; margin-top:.5rem; }
+    .fert-dosis-table th { background:var(--amber-500); color:white; padding:.5rem .6rem; text-align:left; font-weight:700; }
+    .fert-dosis-table th:first-child { border-radius:6px 0 0 0; }
+    .fert-dosis-table th:last-child  { border-radius:0 6px 0 0;  }
+    .fert-dosis-table td { padding:.5rem .6rem; border-bottom:1px solid var(--divider); color:var(--text-secondary); vertical-align:top; }
+    .fert-dosis-table tr:last-child td { border-bottom:none; }
+
+    .vegetacion-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .6rem;
+    }
+    .veg-item {
+      background: var(--surface);
+      border: 1px solid var(--divider);
+      border-radius: 12px;
+      padding: .75rem;
+    }
+    .veg-item h4 { font-size:.82rem; font-weight:700; color:var(--text-primary); margin-bottom:.25rem; }
+    .veg-item p  { font-size:.75rem; color:var(--text-secondary); line-height:1.4; }
+  </style>
+</head>
+<body class="app-layout">
+<div class="app-container">
+
+  <header class="app-header">
+    <a href="aprender.html" class="app-header-back" aria-label="Volver"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></a>
+    <div class="app-header-title">Uso del Fertilizante</div>
+    <div style="width:38px"></div>
+  </header>
+
+  <main>
+    <div class="learn-page-hero hero-amber" data-emoji="🌿">
+      <h1>🌿 Uso del Fertilizante</h1>
+      <p>Aplica el fertilizante correcto en el momento adecuado para maximizar el rendimiento de tu cultivo.</p>
+    </div>
+
+    <!-- Plan personalizado según cultivo -->
+    <div id="plan-wrap"></div>
+
+    <!-- Selector de fertilizante -->
+    <div class="learn-section">
+      <div class="learn-section-title">
+        <span class="s-icon">🧪</span>
+        ¿Qué fertilizante tienes disponible?
+      </div>
+      <p style="font-size:.83rem;color:var(--text-secondary);margin-bottom:.85rem">
+        Selecciona el tipo de fertilizante para ver cómo y cuándo aplicarlo.
+      </p>
+
+      <div class="fertilizante-selector">
+        <div class="fert-item" onclick="mostrarFertilizante('urea')">
+          <span class="fert-emoji">🟡</span>
+          <span class="fert-nombre">Urea</span>
+          <span class="fert-tag">46% N</span>
+        </div>
+        <div class="fert-item" onclick="mostrarFertilizante('triple15')">
+          <span class="fert-emoji">⚪</span>
+          <span class="fert-nombre">Triple 15</span>
+          <span class="fert-tag">N-P-K</span>
+        </div>
+        <div class="fert-item" onclick="mostrarFertilizante('organico')">
+          <span class="fert-emoji">🟤</span>
+          <span class="fert-nombre">Orgánico</span>
+          <span class="fert-tag">Compost</span>
+        </div>
+      </div>
+
+      <div class="fert-info-panel" id="fert-panel"></div>
+    </div>
+
+    <!-- Cronograma general -->
+    <div class="learn-section">
+      <div class="learn-section-title">
+        <span class="s-icon">📅</span>
+        Cronograma de fertilización
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot tl-green">1</div>
+          <div class="timeline-content">
+            <span class="timeline-tag tag-green">Siembra — Día 0</span>
+            <h4>Fertilización de base</h4>
+            <p>Aplica fertilizante completo (N-P-K) al fondo del surco. Triple 15 o DAP son ideales. Incorpora al suelo antes de sembrar.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot tl-yellow">2</div>
+          <div class="timeline-content">
+            <span class="timeline-tag tag-yellow">V3–V4 — Día 20–25</span>
+            <h4>Primera fertilización nitrogenada</h4>
+            <p>Aplica urea o sulfato de amonio. Incorpora con aporque superficial. Moment ideal: antes de lluvia esperada o riego.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot tl-orange">3</div>
+          <div class="timeline-content">
+            <span class="timeline-tag tag-orange">V6–V8 — Día 45–55</span>
+            <h4>Segunda fertilización nitrogenada (aporque)</h4>
+            <p>Segunda dosis de urea con aporque. Cubre la base de la planta. Esta aplicación define el número de granos por mazorca.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot tl-green">✓</div>
+          <div class="timeline-content">
+            <span class="timeline-tag tag-green">Post-floración</span>
+            <h4>No fertilizar en madurez</h4>
+            <p>Después de R1 (floración) no es necesario ni efectivo fertilizar. El grano ya está formado y acumula nutrientes de las hojas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Indicadores visuales de nitrógeno -->
+    <div class="learn-section">
+      <div class="learn-section-title">
+        <span class="s-icon">🔍</span>
+        Inferencia de nitrógeno por la vegetación
+      </div>
+      <p style="font-size:.83rem;color:var(--text-secondary);margin-bottom:.85rem">
+        Observa las plantas alrededor de tu parcela para inferir el nivel de nitrógeno del suelo:
+      </p>
+      <div class="vegetacion-grid">
+        <div class="veg-item">
+          <h4>🌿 Matarrón / Leguminosas</h4>
+          <p>Indica suelo con buen nitrógeno. Puedes reducir la dosis de urea un 20%.</p>
+        </div>
+        <div class="veg-item">
+          <h4>🌾 Pastos fuertes y densos</h4>
+          <p>Suelo moderado. Aplica dosis estándar recomendada para tu variedad.</p>
+        </div>
+        <div class="veg-item">
+          <h4>🍂 Pocas plantas / secas</h4>
+          <p>Suelo pobre en nitrógeno. Incrementa la dosis un 15–20% y aplica compost.</p>
+        </div>
+        <div class="veg-item">
+          <h4>💛 Hojas del maíz amarillas</h4>
+          <p>Deficiencia activa de N. Aplica urea foliar o en banda urgente al suelo.</p>
+        </div>
+      </div>
+
+      <div class="learn-alert warn" style="margin-top:.75rem">
+        <span class="learn-alert-icon">⚠️</span>
+        <p><strong>Recuerda:</strong> El amarillamiento empieza en las hojas más viejas (de abajo hacia arriba) si es deficiencia de nitrógeno. Si empieza por las hojas nuevas, puede ser falta de hierro o zinc.</p>
+      </div>
+    </div>
+
+    <!-- Aplicación eficiente -->
+    <div class="learn-section">
+      <div class="learn-section-title">
+        <span class="s-icon">✅</span>
+        Claves para aplicación eficiente
+      </div>
+      <div class="tip-list">
+        <div class="tip-item">
+          <span class="tip-item-icon">🌧️</span>
+          <p><strong>Aplica antes de lluvia:</strong> Fertiliza 1–2 días antes de lluvia para que el agua incorpore el fertilizante al suelo sin pérdidas.</p>
+        </div>
+        <div class="tip-item">
+          <span class="tip-item-icon">📏</span>
+          <p><strong>Distancia correcta:</strong> Aplica la urea a 5–8 cm de la planta, no en contacto directo. El contacto directo puede quemar las raíces.</p>
+        </div>
+        <div class="tip-item">
+          <span class="tip-item-icon">⏰</span>
+          <p><strong>Hora de aplicación:</strong> Temprano en la mañana o tarde en la tarde. Evita el mediodía — el calor volatiliza el nitrógeno de la urea.</p>
+        </div>
+        <div class="tip-item">
+          <span class="tip-item-icon">🚫</span>
+          <p><strong>No excedas la dosis:</strong> Más no es mejor. El exceso de nitrógeno produce plantas grandes pero poco grano, y contamina el agua subterránea.</p>
+        </div>
+      </div>
+    </div>
+
+    <button onclick="consultarAgroBot('¿Qué fertilizante debo aplicar ahora según la etapa de mi cultivo de maíz y cómo debo aplicarlo?')" class="learn-cta">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Pedir plan de fertilización a AgroBot
+    </button>
+  </main>
+</div>
+
+<nav class="bottom-nav">
+  <a href="dashboard.html" class="nav-item">
+    <svg viewBox="0 0 24 24" width="24" height="24" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+    <span>Inicio</span>
+  </a>
+  <a href="aprender.html" class="nav-item active">
+    <svg viewBox="0 0 24 24" width="24" height="24" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+    <span>Aprender</span>
+  </a>
+  <a href="#" class="nav-item">
+    <svg viewBox="0 0 24 24" width="24" height="24" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+    <span class="usuario-nombre">Perfil</span>
+  </a>
+  <button onclick="Auth.cerrarSesion()" class="nav-item" style="background:none;border:none;cursor:pointer;">
+    <svg viewBox="0 0 24 24" width="24" height="24" stroke-width="2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+    <span>Salir</span>
+  </button>
+</nav>
+<a href="asistente.html" class="chat-fab" aria-label="Abrir AgroBot">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  <span class="chat-fab-pulse"></span>
+</a>
+<link rel="stylesheet" href="../css/asistente.css" />
+
+<script src="../js/config.js"></script>
+  <script src="../js/api.js"></script>
+<script>
+requireAuth();
+const u = Auth.getUsuario();
+if (u) document.querySelectorAll('.usuario-nombre').forEach(el => el.textContent = u.nombre);
+
+const fertData = {
+  urea: {
+    nombre: 'Urea (46% N)',
+    desc: 'Fertilizante nitrogenado más concentrado y económico. Ideal para la primera y segunda fertilización.',
+    dosis: [
+      { etapa: 'Siembra (base)',   dosis: '—',           obs: 'No aplicar urea en la siembra, puede quemar la semilla.' },
+      { etapa: 'V3–V4 (1ra)',     dosis: '80–100 kg/ha', obs: 'Incorporar con aporque o antes de lluvia.' },
+      { etapa: 'V6–V8 (2da)',     dosis: '100–120 kg/ha',obs: 'Segunda aplicación con aporque profundo.' },
+    ]
+  },
+  triple15: {
+    nombre: 'Triple 15 (15-15-15)',
+    desc: 'Fertilizante completo con Nitrógeno, Fósforo y Potasio. Ideal para la fertilización de base.',
+    dosis: [
+      { etapa: 'Siembra (base)',   dosis: '150–200 kg/ha', obs: 'Aplicar en el fondo del surco antes de sembrar.' },
+      { etapa: 'V3–V4 (1ra)',     dosis: '100 kg/ha',     obs: 'Como complemento si el suelo tiene buen P.' },
+      { etapa: 'V6–V8 (2da)',     dosis: 'No necesario',  obs: 'En 2da aplicación, preferir solo urea.' },
+    ]
+  },
+  organico: {
+    nombre: 'Abono orgánico / Compost',
+    desc: 'Mejora la estructura del suelo, retiene humedad y libera nutrientes lentamente. Complementa a los químicos.',
+    dosis: [
+      { etapa: 'Pre-siembra',      dosis: '2–5 ton/ha',   obs: 'Incorporar al suelo 2–4 semanas antes de sembrar.' },
+      { etapa: 'Siembra',          dosis: '500 kg/ha',    obs: 'En el surco junto a la semilla (compost maduro).' },
+      { etapa: 'V3–V6',           dosis: '1–2 ton/ha',   obs: 'Aplicar como mulch alrededor de las plantas.' },
+    ]
+  }
+};
+
+function mostrarFertilizante(tipo) {
+  const d = fertData[tipo];
+  const panel = document.getElementById('fert-panel');
+  document.querySelectorAll('.fert-item').forEach(el => el.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+
+  panel.innerHTML = `
+    <h4>${d.nombre}</h4>
+    <p style="font-size:.82rem;color:var(--text-secondary);margin-bottom:.75rem">${d.desc}</p>
+    <div style="overflow-x:auto;border-radius:8px;border:1px solid var(--divider)">
+      <table class="fert-dosis-table">
+        <thead><tr><th>Etapa</th><th>Dosis</th><th>Observación</th></tr></thead>
+        <tbody>
+          ${d.dosis.map(r => `
+            <tr>
+              <td><strong>${r.etapa}</strong></td>
+              <td>${r.dosis}</td>
+              <td>${r.obs}</td>
+            </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>`;
+  panel.classList.add('visible');
+}
+
+// Plan personalizado según cultivo real
+(async () => {
+  const wrap = document.getElementById('plan-wrap');
+  if (!wrap) return;
+  try {
+    const { ok, datos } = await CultivoService.obtener();
+    if (!ok || !datos.cultivo?.fecha_siembra) return;
+
+    const dias = Math.floor((Date.now() - new Date(datos.cultivo.fecha_siembra)) / 86400000);
+    let recom = null;
+
+    if (dias < 0)       recom = { tipo:'info',  icono:'📅', msg: 'Tu fecha de siembra aún no ha llegado. Prepara el fertilizante de base.' };
+    else if (dias <= 15) recom = { tipo:'ok',    icono:'🌱', msg: '<strong>Ahora:</strong> Verifica que aplicaste la fertilización de base (Triple 15 o DAP en el surco de siembra).' };
+    else if (dias <= 30) recom = { tipo:'warn',  icono:'⚠️', msg: `<strong>Día ${dias} — Momento de la 1ra fertilización:</strong> Aplica urea o sulfato de amonio (V3–V4). Hazlo antes de lluvia o riega después.` };
+    else if (dias <= 55) recom = { tipo:'warn',  icono:'⚠️', msg: `<strong>Día ${dias} — Preparar 2da fertilización:</strong> Entre el día 45–55 es la segunda aplicación de urea con aporque. Prepara el fertilizante.` };
+    else if (dias <= 75) recom = { tipo:'risk',  icono:'🚨', msg: `<strong>Día ${dias} — Floración:</strong> No fertilices durante la floración. Enfócate en el riego y control de plagas.` };
+    else                 recom = { tipo:'ok',    icono:'✅', msg: `<strong>Día ${dias}:</strong> El ciclo de fertilización ya terminó. El grano está acumulando nutrientes de la planta. No hay más aplicaciones necesarias.` };
+
+    if (recom) {
+      wrap.innerHTML = `
+        <div class="learn-section" style="border-left:4px solid var(--amber-500)">
+          <div class="learn-section-title" style="margin-bottom:.5rem">
+            <span class="s-icon">🎯</span> Tu plan personalizado — Día ${dias}
+          </div>
+          <div class="learn-alert ${recom.tipo}">
+            <span class="learn-alert-icon">${recom.icono}</span>
+            <p>${recom.msg}</p>
+          </div>
+        </div>`;
+    }
+  } catch (_) {}
+})();
+
+function consultarAgroBot(pregunta) {
+    sessionStorage.setItem('agrobot_consulta_pendiente', pregunta);
+    window.location.href = 'asistente.html';
+}
+</script>
+</body>
+</html>

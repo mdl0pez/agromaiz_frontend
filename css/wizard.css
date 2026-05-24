@@ -1,0 +1,324 @@
+/* ============================================================
+   AgroMaíz — wizard.css  (v2 — Elegante & Sofisticado)
+   Flujo multi-paso: Registrar Cultivo
+   ============================================================ */
+
+/* ══════════════════════════════════════════════════════════
+   WIZARD BODY / CONTAINER
+══════════════════════════════════════════════════════════ */
+.wizard-body { background: var(--surface, #F7FAF7); }
+
+.wizard-container {
+  max-width: 680px;
+  padding-bottom: 100px;
+}
+
+.wizard-logo {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--green-900);
+  display: flex; align-items: center; gap: .5rem;
+  letter-spacing: -.01em;
+}
+
+/* ══════════════════════════════════════════════════════════
+   STEPPER
+══════════════════════════════════════════════════════════ */
+.stepper-wrapper { padding: .75rem 0 2rem; }
+.stepper {
+  display: flex; justify-content: space-between; position: relative;
+  max-width: 380px; margin: 0 auto;
+}
+.stepper::before {
+  content: '';
+  position: absolute;
+  top: 14px; left: 16%; right: 16%; height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--gray-200) 0, var(--gray-200) 5px,
+    transparent 5px, transparent 10px
+  );
+  z-index: 1;
+}
+.step-item {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  background: var(--surface, #F7FAF7); padding: 0 10px;
+  transition: var(--transition);
+}
+.step-circle {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--gray-100); border: 2px solid var(--gray-200);
+  color: var(--gray-400);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .82rem; font-weight: 700;
+  transition: all .35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.step-label {
+  font-size: .72rem; color: var(--gray-400); font-weight: 500;
+  transition: var(--transition); white-space: nowrap;
+}
+.step-item.active .step-circle {
+  background: var(--green-900); border-color: var(--green-900);
+  color: var(--white); transform: scale(1.15);
+  box-shadow: 0 4px 12px rgba(27,67,50,.3);
+}
+.step-item.active .step-label { color: var(--green-900); font-weight: 700; }
+.step-item.completed .step-circle {
+  background: var(--green-600); border-color: var(--green-600); color: var(--white);
+}
+
+/* ══════════════════════════════════════════════════════════
+   STEP HEADER
+══════════════════════════════════════════════════════════ */
+.wizard-header {
+  text-align: center; margin-bottom: 2rem;
+  padding: 0 .5rem;
+}
+.wizard-header h1 {
+  font-size: 1.55rem; color: var(--green-900);
+  margin-bottom: .45rem; letter-spacing: -.02em;
+}
+.wizard-header p { font-size: .9rem; color: var(--gray-600); line-height: 1.55; }
+
+/* ══════════════════════════════════════════════════════════
+   STEP ANIMATION
+══════════════════════════════════════════════════════════ */
+.wizard-step { display: none; opacity: 0; transform: translateX(18px); }
+.wizard-step.active { display: block; animation: wizardSlideIn .38s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+@keyframes wizardSlideIn { to { opacity: 1; transform: translateX(0); } }
+
+/* ══════════════════════════════════════════════════════════
+   WIZARD CARDS
+══════════════════════════════════════════════════════════ */
+.wizard-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-md);
+  padding: 1.35rem;
+  margin-bottom: 1.15rem;
+  border: 1px solid #E3EDE3;
+  box-shadow: 0 1px 4px rgba(0,0,0,.04), 0 4px 12px rgba(0,0,0,.03);
+  transition: box-shadow var(--transition);
+}
+@media (min-width: 768px) {
+  .wizard-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.08); }
+}
+.wizard-card.flex-between {
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+}
+
+.wc-header { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.1rem; }
+.wc-header.no-margin { margin-bottom: 0; }
+.wc-icon { font-size: 1.45rem; flex-shrink: 0; margin-top: 1px; }
+.wc-header h3 {
+  font-size: 1rem; font-family: var(--font-body);
+  color: var(--gray-900); margin-bottom: .2rem; font-weight: 700; letter-spacing: -.01em;
+}
+.wc-header p { font-size: .83rem; color: var(--gray-500); line-height: 1.4; }
+
+/* ══════════════════════════════════════════════════════════
+   TOGGLE BUTTONS (Auto / Manual)
+══════════════════════════════════════════════════════════ */
+.toggle-group { display: flex; gap: .6rem; }
+.toggle-btn {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  padding: .85rem; border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  font-size: .9rem; font-weight: 600; color: var(--gray-600);
+  cursor: pointer; transition: all .28s ease;
+  background: var(--gray-50);
+}
+.toggle-btn input { display: none; }
+.toggle-btn.active {
+  background: var(--green-900); border-color: var(--green-900);
+  color: var(--white); box-shadow: 0 4px 14px rgba(27,67,50,.25);
+}
+.toggle-btn:hover:not(.active) { border-color: var(--green-400); background: var(--green-50); }
+
+/* Sí / No */
+.toggle-group-alt { display: flex; gap: 1rem; width: 100%; }
+.toggle-btn-alt {
+  flex: 1; display: flex; align-items: center; justify-content: center; gap: .55rem;
+  padding: .85rem;
+  border: 1.5px solid var(--gray-200); border-radius: var(--radius-md);
+  font-size: .95rem; font-weight: 600; color: var(--gray-700);
+  background: var(--gray-50); cursor: pointer; transition: all .28s ease;
+}
+.toggle-btn-alt .radio-circle {
+  width: 18px; height: 18px;
+  border: 2px solid var(--gray-300); border-radius: 50%; position: relative;
+  transition: border-color .25s;
+}
+.toggle-btn-alt input { display: none; }
+.toggle-btn-alt.active { border-color: var(--green-600); background: var(--green-50); color: var(--green-900); }
+.toggle-btn-alt.active .radio-circle { border-color: var(--green-600); }
+.toggle-btn-alt.active .radio-circle::after {
+  content: ''; position: absolute; inset: 3px;
+  background: var(--green-600); border-radius: 50%;
+}
+
+/* ══════════════════════════════════════════════════════════
+   INPUTS (date, select)
+══════════════════════════════════════════════════════════ */
+.input-wrap input[type="date"],
+.input-wrap select {
+  width: 100%; padding: .95rem 1.25rem;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body); font-size: .95rem; color: var(--gray-800);
+  background: var(--gray-50); outline: none; transition: border-color .25s, box-shadow .25s;
+  appearance: none;
+}
+.input-wrap input[type="date"]:focus,
+.input-wrap select:focus {
+  border-color: var(--green-600);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(64,145,108,.12);
+}
+.input-wrap select {
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2364748B%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat; background-position: right 1.1rem top 50%; background-size: .6rem auto;
+  padding-right: 2.5rem;
+}
+
+/* ══════════════════════════════════════════════════════════
+   OPTION CARDS (Lluvia / Riego / Suelos)
+══════════════════════════════════════════════════════════ */
+.options-list { display: flex; flex-direction: column; gap: .75rem; }
+.option-card {
+  display: flex; align-items: center; gap: 1rem; padding: 1.1rem 1rem;
+  border: 1.5px solid var(--gray-200); border-radius: var(--radius-md);
+  cursor: pointer; transition: all .28s ease; background: #fff;
+  position: relative; overflow: hidden;
+}
+.option-card input { display: none; }
+.oc-icon { font-size: 1.75rem; flex-shrink: 0; }
+.oc-content { flex: 1; }
+.oc-content strong { display: block; font-size: .95rem; color: var(--gray-900); margin-bottom: .2rem; font-weight: 700; letter-spacing: -.01em; }
+.oc-content span { font-size: .8rem; color: var(--gray-500); line-height: 1.4; display: block; }
+.oc-radio {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 2px solid var(--gray-300); position: relative; transition: all .25s; flex-shrink: 0;
+}
+.option-card:hover { border-color: var(--green-400); background: var(--green-50); }
+.option-card.active { border-color: var(--green-600); background: #f0fbf4; }
+.option-card.active .oc-radio { border-color: var(--green-600); }
+.option-card.active .oc-radio::after {
+  content: ''; position: absolute; inset: 4px; background: var(--green-600); border-radius: 50%;
+}
+
+/* Soil images */
+.soil-img {
+  width: 62px; height: 62px; border-radius: 50%;
+  object-fit: cover; border: 2px solid var(--gray-200); flex-shrink: 0;
+  transition: border-color var(--transition);
+}
+.option-card.active .soil-img { border-color: var(--green-500); }
+@media (min-width: 768px) {
+  .options-list.type-soil { display: grid; grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ══════════════════════════════════════════════════════════
+   pH SCALE
+══════════════════════════════════════════════════════════ */
+.info-alert {
+  background: #F0FDF4; color: #166534;
+  border: 1px solid #DCFCE7;
+  padding: .85rem 1rem; border-radius: var(--radius-md);
+  font-size: .85rem; margin-bottom: 1.1rem;
+  display: flex; gap: .5rem; align-items: flex-start;
+}
+.ph-scale { display: flex; gap: .4rem; overflow-x: auto; padding-bottom: .5rem; }
+.ph-item {
+  flex: 1; min-width: 76px; text-align: center;
+  padding: .95rem .5rem;
+  border: 1.5px solid var(--gray-200); border-radius: var(--radius-md);
+  cursor: pointer; transition: all .28s; background: var(--gray-50);
+}
+.ph-item input { display: none; }
+.ph-item span { font-size: .8rem; font-weight: 600; color: var(--gray-700); line-height: 1.3; }
+.ph-item small { color: var(--gray-500); font-weight: 400; }
+.ph-item.active {
+  border-color: var(--green-600); background: var(--green-50);
+  box-shadow: 0 0 0 1px var(--green-600);
+}
+.ph-item.active span { color: var(--green-800); }
+.ph-item:hover:not(.active) { border-color: var(--green-300); background: var(--green-50); }
+
+/* ══════════════════════════════════════════════════════════
+   CLIMA SECTION
+══════════════════════════════════════════════════════════ */
+.btn-connect {
+  background: var(--green-900); color: var(--white);
+  padding: .6rem 1.25rem; border-radius: var(--radius-md);
+  font-weight: 600; font-size: .88rem;
+  display: inline-flex; align-items: center; gap: .35rem;
+  transition: var(--transition);
+  box-shadow: 0 3px 10px rgba(27,67,50,.25);
+}
+.btn-connect:hover { background: var(--green-800); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(27,67,50,.3); }
+
+.clima-section-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem; color: var(--gray-900);
+  display: flex; align-items: center; gap: .5rem;
+  margin-top: 1.5rem; margin-bottom: .85rem;
+  letter-spacing: -.01em;
+}
+.clima-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 1rem; }
+@media (min-width: 600px) { .clima-grid { grid-template-columns: 1fr 1fr; } }
+.clima-card {
+  background: #fff; border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md); padding: 1rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,.04);
+}
+.clima-card-head {
+  padding: .75rem 1rem; border-radius: var(--radius-md) var(--radius-md) 0 0;
+  font-weight: 700; font-size: .88rem;
+  margin: -1rem -1rem 1rem -1rem;
+  display: flex; align-items: center; gap: .5rem;
+}
+.clima-card.lluvia .clima-card-head { background: #DCFCE7; color: #166534; }
+.clima-card.sol   .clima-card-head { background: #FFEDD5; color: #9A3412; }
+.clima-list { list-style: none; padding: 0; }
+.clima-list li {
+  display: flex; align-items: flex-start; gap: .75rem;
+  font-size: .84rem; color: var(--gray-700);
+  margin-bottom: .9rem; line-height: 1.45;
+}
+.clima-list li svg { width: 20px; height: 20px; flex-shrink: 0; stroke: currentColor; stroke-width: 1.5; fill: none; margin-top: 2px; }
+.clima-card.lluvia .clima-list li svg { stroke: #166534; }
+.clima-card.sol    .clima-list li svg { stroke: #9A3412; }
+
+.epocas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; margin-bottom: 1.5rem; }
+.epoca-item { text-align: center; background: var(--gray-50); border-radius: var(--radius-md); padding: .85rem .5rem; border: 1px solid var(--gray-100); }
+.epoca-item .icon { font-size: 1.4rem; margin-bottom: .2rem; }
+.epoca-item h4 { font-size: .88rem; color: var(--green-900); margin-bottom: .1rem; font-weight: 700; }
+.epoca-item small { display: block; font-size: .68rem; color: var(--gray-500); margin-bottom: .4rem; }
+.epoca-item p { font-size: .75rem; color: var(--gray-600); line-height: 1.35; }
+
+/* ══════════════════════════════════════════════════════════
+   FOOTER (fixed continue button)
+══════════════════════════════════════════════════════════ */
+.wizard-footer {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: rgba(255,255,255,.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: .9rem clamp(1rem, 5vw, 2.5rem);
+  box-shadow: 0 -4px 20px rgba(0,0,0,.07);
+  display: flex; gap: 1rem; z-index: 100;
+  border-top: 1px solid var(--gray-100);
+}
+@media (min-width: 768px) {
+  .wizard-footer {
+    max-width: 680px; margin: 0 auto;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    left: 50%; right: auto;
+    transform: translateX(-50%);
+    width: 100%;
+    border-left: 1px solid var(--gray-200);
+    border-right: 1px solid var(--gray-200);
+  }
+}

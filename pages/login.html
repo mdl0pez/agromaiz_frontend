@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iniciar sesión — AgroMaíz</title>
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/auth.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<main class="auth-page">
+
+  <!-- ===== LEFT PANEL ===== -->
+  <aside class="auth-panel" aria-hidden="true">
+    <div class="panel-deco">
+      <div class="deco-circle c1"></div>
+      <div class="deco-circle c2"></div>
+      <div class="deco-circle c3"></div>
+    </div>
+
+    <a href="../index.html" class="panel-logo">
+      <span class="logo-icon">🌽</span>
+      <span>AgroMaíz</span>
+    </a>
+
+    <div class="panel-body">
+      <h2>Bienvenido<br />de vuelta,<br /><em style="font-style:italic;color:var(--green-300)">productor</em></h2>
+      <p>Accede a tu cuenta y consulta el estado de tus cultivos, recomendaciones del día y más.</p>
+      <div class="panel-features">
+        <div class="panel-feature">
+          <div class="pf-icon">🌱</div>
+          <span>Monitoreo en tiempo real de tu cultivo</span>
+        </div>
+        <div class="panel-feature">
+          <div class="pf-icon">🔍</div>
+          <span>Diagnóstico rápido de problemas</span>
+        </div>
+        <div class="panel-feature">
+          <div class="pf-icon">📅</div>
+          <span>Cronograma personalizado de actividades</span>
+        </div>
+        <div class="panel-feature">
+          <div class="pf-icon">📚</div>
+          <span>Guías y consejos agronómicos</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="panel-footer">© 2026 AgroMaíz — Facultad de Ingeniería</p>
+  </aside>
+
+  <!-- ===== FORM PANEL ===== -->
+  <section class="auth-form-panel">
+    <div class="auth-form-wrap">
+
+      <div class="auth-top-nav">
+        <a href="../index.html" class="auth-back">
+          ← Volver al inicio
+        </a>
+        <p class="auth-switch-text">
+          ¿No tienes cuenta? <a href="register.html">Regístrate</a>
+        </p>
+      </div>
+
+      <header class="auth-heading">
+        <h1>Iniciar sesión</h1>
+        <p>Ingresa tus datos para acceder a tu cuenta.</p>
+      </header>
+
+      <form class="auth-form" id="loginForm" novalidate>
+
+        <div class="form-group">
+          <label for="email">Correo electrónico</label>
+          <div class="input-wrap">
+            <span class="input-icon">✉️</span>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="tu@correo.com"
+              autocomplete="email"
+              required
+            />
+          </div>
+          <span class="form-error" id="emailError" role="alert"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <div class="input-wrap">
+            <span class="input-icon">🔒</span>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Tu contraseña"
+              autocomplete="current-password"
+              required
+            />
+            <button
+              type="button"
+              class="input-toggle"
+              id="togglePass"
+              aria-label="Mostrar contraseña"
+            >👁️</button>
+          </div>
+          <span class="form-error" id="passError" role="alert"></span>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:-.25rem">
+          <label class="form-check">
+            <input type="checkbox" id="remember" name="remember" />
+            <span>Recordarme</span>
+          </label>
+          <a href="#" style="font-size:.85rem;color:var(--green-600);font-weight:500;">¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <button type="submit" class="btn-submit" id="loginBtn">
+          <span class="btn-text">Entrar a mi cuenta</span>
+          <div class="spinner"></div>
+        </button>
+
+      </form>
+
+      <!-- Success state -->
+      <div class="auth-success" id="loginSuccess" style="display:none; flex-direction:column; align-items:center; text-align:center; gap:1.5rem; padding:2.5rem 1rem;">
+        <!-- Círculo animado con check — centrado explícitamente -->
+        <div style="
+          width:88px; height:88px; border-radius:50%;
+          background:linear-gradient(135deg,#2D6A4F,#52B788);
+          display:flex; align-items:center; justify-content:center;
+          align-self:center;
+          box-shadow:0 10px 28px rgba(45,106,79,.38);
+          animation: popIn .5s cubic-bezier(0.175,0.885,0.32,1.275) both;
+        ">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none"
+               stroke="white" stroke-width="3"
+               stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+
+        <div style="margin-top:.25rem;">
+          <h3 style="font-size:1.5rem; color:#1B4332; margin-bottom:.5rem; font-weight:700;">
+            ¡Bienvenido a AgroMaíz!
+          </h3>
+          <p style="color:#4A6356; font-size:.93rem; line-height:1.65; max-width:300px;">
+            Has iniciado sesión correctamente.<br>
+            Vamos a ver cómo está tu cultivo de maíz. 🌽
+          </p>
+        </div>
+
+        <!-- Barra de progreso de redirección (4 s) -->
+        <div style="width:100%; max-width:280px;">
+          <div style="height:5px; background:#E3EDE3; border-radius:4px; overflow:hidden;">
+            <div id="redirectBar" style="
+              height:100%; width:0%;
+              background:linear-gradient(90deg,#2D6A4F,#52B788);
+              border-radius:4px;
+            "></div>
+          </div>
+          <p style="font-size:.75rem; color:#8AA899; margin-top:.55rem;">
+            Redirigiendo a tu panel de cultivos…
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<script src="../js/config.js"></script>
+  <script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/login.js"></script>
+</body>
+</html>

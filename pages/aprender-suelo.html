@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reconocer el Suelo — AgroMaíz</title>
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/app.css" />
+  <link rel="stylesheet" href="../css/aprender.css" />
+  <style>
+    .color-selector .selector-item .sel-circle {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      border: 2px solid rgba(0,0,0,.1);
+    }
+    .prueba-card {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      background: var(--surface);
+      border: 1px solid var(--divider);
+      border-radius: 12px;
+      padding: .9rem;
+      margin-bottom: .6rem;
+    }
+    .prueba-num {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--green-700);
+      color: white;
+      font-size: .8rem;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .prueba-card h4 { font-size: .88rem; font-weight: 700; margin-bottom: .2rem; color: var(--text-primary); }
+    .prueba-card p  { font-size: .8rem; color: var(--text-secondary); line-height: 1.5; }
+    .resultado-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .6rem;
+      margin-top: .75rem;
+    }
+    .resultado-item {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: .7rem;
+      text-align: center;
+    }
+    .resultado-item .res-emoji { font-size: 1.4rem; margin-bottom: .25rem; }
+    .resultado-item .res-label { font-size: .75rem; font-weight: 700; color: var(--text-primary); }
+    .resultado-item .res-tipo  { font-size: .7rem; color: var(--text-secondary); margin-top: .1rem; }
+  </style>
+</head>
+<body class="app-layout">
+<div class="app-container">
+
+  <header class="app-header">
+    <a href="aprender.html" class="app-header-back" aria-label="Volver"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></a>
+    <div class="app-header-title">Reconocer el Suelo</div>
+    <div style="width:38px"></div>
+  </header>
+
+  <main>
+    <div class="learn-page-hero hero-earth" data-emoji="🪨">
+      <h1>🪨 Reconocer el Suelo</h1>
+      <p>Identifica el tipo de suelo de tu parcela sin necesidad de análisis de laboratorio.</p>
+    </div>
+
+    <!-- Datos del cultivo registrado -->
+    <div id="suelo-actual-wrap"></div>
+
+    <!-- Color de la tierra -->
+    <div class="learn-section">
+      <div class="learn-section-title">
+        <span class="s-icon">🎨</span>
+        ¿De qué color es tu tierra?
+      </div>
+      <p style="font-size:.83rem;color:var(--text-secondary);margin-bottom:.85rem">
+        El color es el primer indicador de la calidad y tipo de tu suelo.
+      </p>
+      <div class="selector-grid color-selector">
+        <div class="selector-item" onclick="mostrarColorInfo('oscura')">
+          <div class="sel-circle" style="background:#3b2314;width:40px;height:40px;border-radius:50%;border:2px solid rgba(0,0,0,.1)"></div>
+          <span class="sel-label">Oscura</span>
+        </div>
+        <div class="selector-item" onclick="mostrarColorInfo('roja')">
+          <div class="sel-circle" style="background:#a0522d;width:40px;height:40px;border-radius:50%;border:2px solid rgba(0,0,0,.1)"></div>
+          <span class="sel-label">Roja / Café</span>
+        </div>
+        <div class="selector-item" onclick="mostrarColorInfo('clara')">
+          <div class="sel-circle" style="background:#d2b48c;width:40px;height:40px;border-radius:50%;border:2px solid rgba(0,0,0,.1)"></div>
+          <span class="sel-label">Clara / Gris</span>
+        </div>
+      </div>
+      <div id="color-info" style="margin-top:.75rem"></div>
+    </div>
+
+    <!-- Prueba de textura -->
+    <div class="learn-section">
+      <div class="learn-section-title">
+        <span class="s-icon">👋</span>
+        Prueba de textura (sin laboratorio)
+      </div>
+      <p style="font-size:.83rem;color:var(--text-secondary);margin-bottom:.85rem">
+        Toma un puñado de tierra húmeda y sigue estos pasos:
+      </p>
+
+      <div class="prueba-card">
+        <div class="prueba-num">1</div>
+        <div>
+          <h4>Hacer una bolita</h4>
+          <p>Humedece la tierra y apriétala firmemente formando una bola del tamaño de una canica.</p>
+        </div>
+      </div>
+      <div class="prueba-card">
+        <div class="prueba-num">2</div>
+        <div>
+          <h4>Observar el resultado</h4>
+          <p>Abre la mano lentamente y observa qué pasa con la bolita.</p>
+        </div>
+      </div>
+
+      <div class="resultado-grid">
+        <div class="resultado-item">
+          <div class="res-emoji">💨</div>
+          <div class="res-label">Se desmorona</div>
+          <div class="res-tipo">Suelo arenoso</div>
+        </div>
+        <div class="resultado-item">
+          <div class="res-emoji">🫙</div>
+          <div class="res-label">Se mantiene unida</div>
+          <div class="res-tipo">Arcilloso o limoso</div>
+        </div>
+      </div>
+
+      <div class="prueba-card" style="margin-top:.75rem">
+        <div class="prueba-num">3</div>
+        <div>
+          <h4>Prueba de la cinta (si se mantuvo unida)</h4>
+          <p>Intenta formar una cinta larga con los dedos. Si la cinta supera 2.5 cm antes de romperse → arcilloso. Si se rompe antes → limoso.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabla comparativa de tipos -->
+    <div class="learn-section">
+      <div class="learn-section-title">
+        <span class="s-icon">📊</span>
+        Comparativa de tipos de suelo
+      </div>
+      <div style="overflow-x:auto;border-radius:10px;border:1px solid var(--divider)">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Característica</th>
+              <th>🏜️ Arenoso</th>
+              <th>🌍 Limoso</th>
+              <th>🧱 Arcilloso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Retención agua</strong></td>
+              <td>Baja</td>
+              <td>Media</td>
+              <td>Alta</td>
+            </tr>
+            <tr>
+              <td><strong>Drenaje</strong></td>
+              <td>Excelente</td>
+              <td>Bueno</td>
+              <td>Deficiente</td>
+            </tr>
+            <tr>
+              <td><strong>Nutrientes</strong></td>
+              <td>Pocos</td>
+              <td>Buenos</td>
+              <td>Muchos</td>
+            </tr>
+            <tr>
+              <td><strong>Para maíz</strong></td>
+              <td>Regular — regar más</td>
+              <td>Ideal</td>
+              <td>Riesgo encharcamiento</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Indicadores de materia orgánica -->
+    <div class="learn-section">
+      <div class="learn-section-title">
+        <span class="s-icon">🌿</span>
+        Indicadores de materia orgánica
+      </div>
+      <div class="tip-list">
+        <div class="tip-item">
+          <span class="tip-item-icon">🪱</span>
+          <p><strong>Lombrices:</strong> Si encuentras 10+ lombrices en 30x30 cm de suelo, la materia orgánica es buena.</p>
+        </div>
+        <div class="tip-item">
+          <span class="tip-item-icon">🟤</span>
+          <p><strong>Color oscuro:</strong> Suelo oscuro = más materia orgánica. Suelo muy claro = bajo contenido orgánico.</p>
+        </div>
+        <div class="tip-item">
+          <span class="tip-item-icon">🌱</span>
+          <p><strong>Plantas indicadoras:</strong> Matarrón y leguminosas → suelo con nitrógeno. Pocas plantas o secas → suelo pobre.</p>
+        </div>
+        <div class="tip-item">
+          <span class="tip-item-icon">👃</span>
+          <p><strong>Olor:</strong> Suelo con buen olor a tierra húmeda ("petricor") = activo microbiológicamente. Olor a huevo podrido = mal drenaje.</p>
+        </div>
+      </div>
+    </div>
+
+    <button onclick="consultarAgroBot('Tengo un suelo registrado en mi cultivo. ¿Qué recomendaciones específicas me das para manejar este tipo de suelo en el cultivo de maíz?')" class="learn-cta">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Preguntarle a AgroBot sobre mi suelo
+    </button>
+  </main>
+</div>
+
+<nav class="bottom-nav">
+  <a href="dashboard.html" class="nav-item">
+    <svg viewBox="0 0 24 24" width="24" height="24" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+    <span>Inicio</span>
+  </a>
+  <a href="aprender.html" class="nav-item active">
+    <svg viewBox="0 0 24 24" width="24" height="24" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+    <span>Aprender</span>
+  </a>
+  <a href="#" class="nav-item">
+    <svg viewBox="0 0 24 24" width="24" height="24" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+    <span class="usuario-nombre">Perfil</span>
+  </a>
+  <button onclick="Auth.cerrarSesion()" class="nav-item" style="background:none;border:none;cursor:pointer;">
+    <svg viewBox="0 0 24 24" width="24" height="24" stroke-width="2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+    <span>Salir</span>
+  </button>
+</nav>
+<a href="asistente.html" class="chat-fab" aria-label="Abrir AgroBot">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  <span class="chat-fab-pulse"></span>
+</a>
+<link rel="stylesheet" href="../css/asistente.css" />
+
+<script src="../js/config.js"></script>
+  <script src="../js/api.js"></script>
+<script>
+requireAuth();
+const u = Auth.getUsuario();
+if (u) document.querySelectorAll('.usuario-nombre').forEach(el => el.textContent = u.nombre);
+
+const colorData = {
+  oscura: { emoji:'🟤', titulo:'Suelo oscuro', texto:'Indica alta materia orgánica. Excelente para el maíz. Retiene bien la humedad y tiene buen contenido de nutrientes.' },
+  roja:   { emoji:'🟥', titulo:'Suelo rojo / café', texto:'Indica presencia de hierro (ferroso). Común en zonas tropicales. Puede ser ácido — revisa el pH. Buen drenaje pero puede ser bajo en fósforo.' },
+  clara:  { emoji:'⬜', titulo:'Suelo claro / gris', texto:'Puede indicar bajo contenido orgánico, alta presencia de arena o exceso de humedad. Requiere enmiendas orgánicas y revisión del drenaje.' },
+};
+
+function mostrarColorInfo(tipo) {
+  const d = colorData[tipo];
+  document.getElementById('color-info').innerHTML = `
+    <div class="learn-alert info">
+      <span class="learn-alert-icon">${d.emoji}</span>
+      <p><strong>${d.titulo}:</strong> ${d.texto}</p>
+    </div>`;
+  document.querySelectorAll('.color-selector .selector-item').forEach(el => el.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+}
+
+// Mostrar tipo de suelo registrado
+(async () => {
+  const wrap = document.getElementById('suelo-actual-wrap');
+  if (!wrap) return;
+  try {
+    const { ok, datos } = await CultivoService.obtener();
+    if (!ok || !datos.cultivo?.tipo_suelo) return;
+    const labels = { arenoso:'Arenoso 🏜️', limoso:'Limoso 🌍', arcilloso:'Arcilloso 🧱' };
+    const phLabels = { acido:'Ácido', lig_acido:'Lig. ácido', neutro:'Neutro', lig_alca:'Lig. alcalino', alca:'Alcalino' };
+    wrap.innerHTML = `
+      <div class="learn-section" style="border-left:4px solid var(--earth-600)">
+        <div class="learn-section-title" style="margin-bottom:.5rem">
+          <span class="s-icon">📋</span> Tu suelo registrado
+        </div>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <span class="etapa-actual-badge" style="background:var(--earth-600)">🪨 ${labels[datos.cultivo.tipo_suelo] || datos.cultivo.tipo_suelo}</span>
+          ${datos.cultivo.ph_suelo ? `<span class="etapa-actual-badge" style="background:var(--green-700)">⚗️ pH ${phLabels[datos.cultivo.ph_suelo] || datos.cultivo.ph_suelo}</span>` : ''}
+        </div>
+      </div>`;
+  } catch (_) {}
+})();
+
+function consultarAgroBot(pregunta) {
+    sessionStorage.setItem('agrobot_consulta_pendiente', pregunta);
+    window.location.href = 'asistente.html';
+}
+</script>
+</body>
+</html>

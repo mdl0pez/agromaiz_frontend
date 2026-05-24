@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrar Cultivo — AgroMaíz</title>
+  <!-- Sugerencias de municipio -->
+  <style>
+    #municipio-suggestions {
+      display: none;
+      position: absolute;
+      z-index: 100;
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,.1);
+      max-height: 200px;
+      overflow-y: auto;
+      width: 100%;
+      top: 100%;
+      left: 0;
+    }
+    #municipio-input { width: 100%; }
+  </style>
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/app.css" />
+  <link rel="stylesheet" href="../css/wizard.css" />
+</head>
+<body class="app-layout wizard-body">
+
+  <div class="app-container wizard-container">
+    <header class="app-header">
+      <a href="dashboard.html" class="app-header-back" aria-label="Volver"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></a>
+      <div class="wizard-logo">🌽 AgroMaíz</div>
+      <div style="width: 24px;"></div>
+    </header>
+
+    <div class="stepper-wrapper">
+      <div class="stepper">
+        <div class="step-item active" data-step="1"><div class="step-circle">1</div><span class="step-label">Cultivo</span></div>
+        <div class="step-item" data-step="2"><div class="step-circle">2</div><span class="step-label">Suelos</span></div>
+        <div class="step-item" data-step="3"><div class="step-circle">3</div><span class="step-label">Clima</span></div>
+      </div>
+    </div>
+
+    <div class="wizard-header">
+      <h1 id="step-title">Registrar cultivo</h1>
+      <p id="step-desc">Completa la información de tu cultivo de maíz para recibir recomendaciones personalizadas.</p>
+    </div>
+
+    <form id="wizardForm" novalidate>
+      
+      <div class="wizard-step active" id="step-1">
+        
+        <div class="wizard-card">
+          <div class="wc-header">
+            <span class="wc-icon">📍</span>
+            <div><h3>Ubicación</h3><p>Selecciona cómo obtener tu ubicación</p></div>
+          </div>
+          <div class="toggle-group">
+            <label class="toggle-btn active"><input type="radio" name="ubicacion" value="gps" checked><span>📍 Auto (GPS)</span></label>
+            <label class="toggle-btn"><input type="radio" name="ubicacion" value="manual"><span>✏️ Manual</span></label>
+          </div>
+
+          <div id="gps-status" style="margin-top:.75rem;font-size:.85rem;min-height:2rem;display:flex;align-items:center;gap:.5rem;">
+            <div id="gps-spinner" style="display:none;width:16px;height:16px;border:2px solid var(--green-200);border-top-color:var(--green-600);border-radius:50%;animation:spin 1s linear infinite;flex-shrink:0;"></div>
+            <span id="gps-text"></span>
+          </div>
+          
+          <div id="manual-location-fields" style="display: none; margin-top: 1rem; border-top: 1px solid var(--gray-200); padding-top: 1rem;">
+            <div style="margin-bottom: 1rem;">
+              <label style="font-size:.85rem; font-weight:700; color:var(--gray-800); display:block; margin-bottom:.5rem;">Municipio</label>
+              <div class="input-wrap">
+                <div style="position:relative">
+                  <input
+                    type="text"
+                    id="municipio-input"
+                    placeholder="Escribe tu municipio o vereda..."
+                    autocomplete="off"
+                    style="width:100%; padding:.6rem .75rem; border:1px solid var(--gray-300); border-radius:8px; font-size:.9rem;"
+                  />
+                  <ul id="municipio-suggestions"></ul>
+                </div>
+                <input type="hidden" name="departamento" id="departamento-hidden" />
+                <input type="hidden" name="municipio"    id="municipio-hidden"    />
+              </div>
+              <div style="margin-top:.75rem;">
+                <label style="font-size:.85rem;font-weight:700;color:var(--gray-800);display:block;margin-bottom:.5rem;">Departamento</label>
+                <select name="departamento_manual" style="width:100%;padding:.6rem .75rem;border:1px solid var(--gray-300);border-radius:8px;font-size:.9rem;">
+                  <option value="" disabled selected>Selecciona...</option>
+                  <option>Amazonas</option>
+                  <option>Antioquia</option>
+                  <option>Arauca</option>
+                  <option>Atlántico</option>
+                  <option>Bolívar</option>
+                  <option>Boyacá</option>
+                  <option>Caldas</option>
+                  <option>Caquetá</option>
+                  <option>Casanare</option>
+                  <option>Cauca</option>
+                  <option>Cesar</option>
+                  <option>Chocó</option>
+                  <option>Córdoba</option>
+                  <option>Cundinamarca</option>
+                  <option>Guainía</option>
+                  <option>Guaviare</option>
+                  <option>Huila</option>
+                  <option>La Guajira</option>
+                  <option>Magdalena</option>
+                  <option>Meta</option>
+                  <option>Nariño</option>
+                  <option>Norte de Santander</option>
+                  <option>Putumayo</option>
+                  <option>Quindío</option>
+                  <option>Risaralda</option>
+                  <option>San Andrés y Providencia</option>
+                  <option>Santander</option>
+                  <option>Sucre</option>
+                  <option>Tolima</option>
+                  <option>Valle del Cauca</option>
+                  <option>Vaupés</option>
+                  <option>Vichada</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wizard-card">
+          <div class="wc-header">
+            <span class="wc-icon">📅</span>
+            <div><h3>Fecha de siembra</h3><p>Selecciona la fecha en que sembraste tu maíz</p></div>
+          </div>
+          <div class="input-wrap">
+            <input type="date" name="fecha_siembra" required>
+          </div>
+        </div>
+
+        <div class="wizard-card">
+          <div class="wc-header">
+            <span class="wc-icon">🌱</span>
+            <div><h3>Tipo de manejo</h3><p>¿Cómo manejas tu cultivo?</p></div>
+          </div>
+          <div class="options-list">
+            <label class="option-card active">
+              <input type="radio" name="manejo" value="lluvia" checked>
+              <div class="oc-radio"></div>
+              <span class="oc-icon">🌧️</span>
+              <div class="oc-content">
+                <strong>Solo lluvia</strong>
+                <span>Dependo únicamente de las lluvias</span>
+              </div>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="manejo" value="riego">
+              <div class="oc-radio"></div>
+              <span class="oc-icon">💧</span>
+              <div class="oc-content">
+                <strong>Con riego</strong>
+                <span>Cuenta con riego adicional</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="wizard-card">
+          <div class="wc-header">
+            <span class="wc-icon">🧪</span>
+            <div><h3>¿Tiene análisis de suelo?</h3><p>Esto nos ayuda a darte mejores recomendaciones</p></div>
+          </div>
+          <div class="toggle-group-alt">
+            <label class="toggle-btn-alt active">
+              <input type="radio" name="analisis" value="si" checked>
+              <div class="radio-circle"></div><span>Sí</span>
+            </label>
+            <label class="toggle-btn-alt">
+              <input type="radio" name="analisis" value="no">
+              <div class="radio-circle"></div><span>No</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="wizard-step" id="step-2">
+        <div class="options-list" style="margin-bottom: 1.5rem;">
+          <label class="option-card active" style="padding: 1.5rem 1rem;">
+            <input type="radio" name="tipo_suelo" value="arenoso" checked>
+            <img src="../assets/img/suelo_arenoso.webp" alt="Suelo Arenoso" class="soil-img" style="background:#d2b48c;">
+            <div class="oc-content">
+              <strong>Arenoso</strong>
+              <span>Se siente áspero al tacto. Los granos se notan sueltos y no se forma una bola al apretarlo.</span>
+            </div>
+            <div class="oc-radio"></div>
+          </label>
+          <label class="option-card" style="padding: 1.5rem 1rem;">
+            <input type="radio" name="tipo_suelo" value="limoso">
+            <img src="../assets/img/suelo_limoso.webp" alt="Suelo Limoso" class="soil-img" style="background:#8b5a2b;">
+            <div class="oc-content">
+              <strong>Limoso</strong>
+              <span>Se siente suave y sedoso. Al humedecerlo forma una bola débil que se rompe fácilmente.</span>
+            </div>
+            <div class="oc-radio"></div>
+          </label>
+          <label class="option-card" style="padding: 1.5rem 1rem;">
+            <input type="radio" name="tipo_suelo" value="arcilloso">
+            <img src="../assets/img/suelo_arcilloso.jpg" alt="Suelo Arcilloso" class="soil-img" style="background:#5c4033;">
+            <div class="oc-content">
+              <strong>Arcilloso</strong>
+              <span>Se siente pegajoso y resbaladizo. Al humedecerlo forma una bola firme que no se rompe fácilmente.</span>
+            </div>
+            <div class="oc-radio"></div>
+          </label>
+        </div>
+
+        <div class="wizard-card">
+          <div class="wc-header">
+            <span class="wc-icon">🧪</span>
+            <div><h3>Nivel de pH del suelo</h3><p>Indica el nivel de pH de tu suelo.</p></div>
+          </div>
+          <div class="info-alert">
+            <i style="font-style: normal;">ℹ️</i> Si cuentas con un estudio de suelos, selecciona el valor correspondiente. Si no, selecciona "Neutro".
+          </div>
+          <div class="ph-scale">
+            <label class="ph-item"><input type="radio" name="ph" value="acido"><span>Ácido<br><small>(< 6)</small></span></label>
+            <label class="ph-item"><input type="radio" name="ph" value="lig_acido"><span>Ligeramente ácido<br><small>(6 - 6.5)</small></span></label>
+            <label class="ph-item active"><input type="radio" name="ph" value="neutro" checked><span>Neutro<br><small>(6.5 - 7.5)</small></span></label>
+            <label class="ph-item"><input type="radio" name="ph" value="lig_alca"><span>Ligeramente alcalino<br><small>(7.5 - 8)</small></span></label>
+            <label class="ph-item"><input type="radio" name="ph" value="alca"><span>Alcalino<br><small>(> 8)</small></span></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="wizard-step" id="step-3">
+        <div class="wizard-card flex-between">
+          <div class="wc-header no-margin">
+            <span class="wc-icon" style="display:flex; align-items:center;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--green-900)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/><path d="M22 10a3 3 0 0 0-3-3h-2.207a5.502 5.502 0 0 0-10.702.5"/></svg>
+            </span>
+            <div><h3>Pronóstico del clima</h3><p>Conéctate a internet para ver el pronóstico actual y de los próximos días.</p></div>
+          </div>
+          <button type="button" class="btn-connect" id="btnConnect" style="white-space: nowrap; display: flex; align-items: center; gap: 8px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+              <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+              <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+              <line x1="12" y1="20" x2="12.01" y2="20"/>
+            </svg> Conectar
+          </button>
+        </div>
+
+        <!-- Nuevo: Pronóstico 7 días -->
+        <div class="wizard-card">
+          <div class="wc-header">
+            <span class="wc-icon">🌤️</span>
+            <div><h3>Pronóstico 7 días</h3><p>Basado en tu ubicación de siembra</p></div>
+          </div>
+          <div id="clima-forecast">
+            <p style="color:var(--gray-400);text-align:center;padding:1rem;font-size:.875rem">
+              La ubicación se obtiene del paso 1. Si usaste GPS, el pronóstico cargará automáticamente.
+            </p>
+          </div>
+        </div>
+
+        <div class="clima-section-title">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--green-900)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+          Señales naturales del clima
+        </div>
+        <p style="font-size: .85rem; color: var(--gray-600); margin-bottom: 1rem;">Observa la naturaleza. Estas señales pueden ayudarte a identificar si lloverá o no.</p>
+        
+        <div class="clima-grid">
+          <div class="clima-card lluvia">
+            <div class="clima-card-head">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 16.2A4.5 4.5 0 0 0 17.5 8h-1.8A7 7 0 1 0 4 14.9"/><path d="M16 14v6"/><path d="M8 14v6"/><path d="M12 16v6"/></svg>
+              Señales de que puede llover
+            </div>
+            <ul class="clima-list">
+              <li><svg viewBox="0 0 24 24"><path d="M20 16.2A4.5 4.5 0 0 0 17.5 8h-1.8A7 7 0 1 0 4 14.9"/><path d="M16 14v6"/><path d="M8 14v6"/><path d="M12 16v6"/></svg> Nubes oscuras, grandes y de desarrollo vertical.</li>
+              <li><svg viewBox="0 0 24 24"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg> Viento húmedo y cálido que sopla del mar o sur.</li>
+              <li><svg viewBox="0 0 24 24"><path d="M16 7h.01"/><path d="M3.4 18H12a8 8 0 0 0 8-8V7a4 4 0 0 0-7.28-2.3L2 20"/><path d="m20 7 2 .5-2 .5"/><path d="M10 18v3"/><path d="M14 17.75V21"/><path d="M7 18a6 6 0 0 0 3.84-10.61"/></svg> Las aves vuelan bajo o se refugian.</li>
+              <li><svg viewBox="0 0 24 24"><path d="M14 14a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z"/><path d="M8 14a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z"/><path d="M20 14a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z"/><path d="M14 18h4"/><path d="M10 18H6"/><path d="M10 10H6"/><path d="M14 10h4"/></svg> Las hormigas suben a lugares altos.</li>
+              <li><svg viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg> Olor a tierra húmeda o fresca.</li>
+            </ul>
+          </div>
+          <div class="clima-card sol">
+            <div class="clima-card-head">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+              Señales de que no lloverá
+            </div>
+            <ul class="clima-list">
+              <li><svg viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg> Nubes blancas y pequeñas que se dispersan rápido.</li>
+              <li><svg viewBox="0 0 24 24"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg> Viento seco y fresco que sopla del norte.</li>
+              <li><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg> Amanecer o atardecer con cielo rojo intenso.</li>
+              <li><svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg> Luna brillante con halo alrededor.</li>
+              <li><svg viewBox="0 0 24 24"><path d="M12 2v20"/><path d="M2 12h20"/><path d="m5 5 14 14"/><path d="m19 5-14 14"/></svg> Grietas en el suelo y polvo seco en el ambiente.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="wizard-card" style="margin-top: 1.5rem;">
+          <div class="wc-header" style="margin-bottom: 1.5rem;">
+            <span class="wc-icon">📅</span>
+            <div><h3>Épocas del año con más lluvias</h3><p>Ten en cuenta las épocas en tu región.</p></div>
+          </div>
+          <div class="epocas-grid">
+            <div class="epoca-item">
+              <div class="icon">🌱</div><h4>Primavera</h4><small>(Marzo - Mayo)</small>
+              <p>Empiezan las lluvias, suelen ser moderadas y frecuentes.</p>
+            </div>
+            <div class="epoca-item">
+              <div class="icon">🌧️</div><h4>Verano</h4><small>(Junio - Agosto)</small>
+              <p>Es la época más lluviosa. Lluvias fuertes y constantes.</p>
+            </div>
+            <div class="epoca-item">
+              <div class="icon">🍂</div><h4>Otoño</h4><small>(Sept - Nov)</small>
+              <p>Las lluvias disminuyen gradualmente.</p>
+            </div>
+          </div>
+          <div class="info-alert" style="background: #F0FDF4; border: 1px solid #DCFCE7;">
+            <i style="font-style:normal;">ℹ️</i> <span><strong>Recuerda:</strong> estas señales pueden variar según la región. Úsalas como guía.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="wizard-footer">
+        <button type="button" class="btn-primary full-center" id="btnNext">Continuar →</button>
+      </div>
+
+    </form>
+  </div>
+
+<script src="../js/config.js"></script>
+  <script src="../js/api.js"></script>  
+<script>                              
+  requireAuth();
+  const u = Auth.getUsuario();
+  if (u) document.querySelectorAll('.usuario-nombre').forEach(el => el.textContent = u.nombre);
+</script>
+<script src="../js/registrar-cultivo.js"></script>
+</body>
+</html>

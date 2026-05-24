@@ -1,0 +1,163 @@
+/* ============================================================
+   AgroMaíz — global.css
+   Base reset, tokens, typography, shared utilities
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+/* ── Tokens ─────────────────────────────────────────────── */
+:root {
+  --green-900: #1B4332;
+  --green-800: #1E5631;
+  --green-700: #2D6A4F;
+  --green-600: #40916C;
+  --green-500: #52B788;
+  --green-400: #74C69D;
+  --green-300: #95D5B2;
+  --green-100: #D8F3DC;
+  --green-50:  #F0FBF4;
+
+  --amber-500: #F59E0B;
+  --amber-400: #FBBF24;
+  --amber-100: #FEF3C7;
+
+  --earth-800: #3E2723;
+  --earth-600: #6D4C41;
+  --earth-200: #D7CCC8;
+
+  --white: #FFFFFF;
+  --gray-50:  #F8FAFC;
+  --gray-100: #F1F5F9;
+  --gray-200: #E2E8F0;
+  --gray-400: #94A3B8;
+  --gray-600: #475569;
+  --gray-800: #1E293B;
+  --gray-900: #0F172A;
+
+  --font-display: 'Baloo 2', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+
+  --radius-sm:  6px;
+  --radius-md:  16px;
+  --radius-lg:  24px;
+  --radius-xl:  32px;
+  --radius-full: 9999px;
+
+  --shadow-sm:  0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+  --shadow-md:  0 4px 16px rgba(0,0,0,.10);
+  --shadow-lg:  0 12px 40px rgba(0,0,0,.14);
+  --shadow-green: 0 8px 30px rgba(64,145,108,.30);
+
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --max-w: 1200px;
+}
+
+/* ── Reset ───────────────────────────────────────────────── */
+*, *::before, *::after { /*box-sizing: border-box;*/ margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--gray-800);
+  background: var(--white);
+  overflow-x: hidden;
+}
+
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+button { font: inherit; cursor: pointer; border: none; background: none; }
+
+/* ── Typography ──────────────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  color: var(--green-900);
+}
+
+/* ── Utilities ───────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 5vw, 2.5rem);
+}
+
+/* ── Shared Buttons ──────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  background: var(--green-600);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: .95rem;
+  padding: .85rem 1.75rem;
+  border-radius: var(--radius-full);
+  border: 2px solid transparent;
+  box-shadow: var(--shadow-green);
+  transition: var(--transition);
+  white-space: nowrap;
+}
+.btn-primary:hover, .btn-primary:focus-visible {
+  background: var(--green-700);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 36px rgba(64,145,108,.38);
+}
+.btn-primary:active { transform: translateY(0); }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  background: transparent;
+  color: var(--green-700);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: .95rem;
+  padding: .85rem 1.75rem;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--green-400);
+  transition: var(--transition);
+  white-space: nowrap;
+}
+.btn-ghost:hover, .btn-ghost:focus-visible {
+  background: var(--green-50);
+  border-color: var(--green-600);
+}
+
+/* ── Section Header ─────────────────────────────────────── */
+.section-header {
+  text-align: center;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+.section-header h2 {
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+}
+.section-tag {
+  display: inline-block;
+  background: var(--green-100);
+  color: var(--green-700);
+  font-size: .8rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: .35rem .9rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 1rem;
+}
+.section-tag.alt {
+  background: rgba(255,255,255,.18);
+  color: var(--white);
+}
+
+/* ── Focus Visible ──────────────────────────────────────── */
+:focus-visible {
+  outline: 3px solid var(--green-400);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monitoreo de Plagas — AgroMaíz</title>
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/app.css" />
+  <link rel="stylesheet" href="../css/wizard.css" />
+</head>
+<body class="app-layout">
+
+  <div class="app-container">
+    
+    <header class="app-header">
+      <a href="que-hacer.html" class="app-header-back" aria-label="Volver"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></a>
+      <div class="wizard-logo" style="justify-content: center; flex: 1; margin-right: 1.5rem;">
+        <div style="text-align: center;">
+          <div style="font-size: 1.2rem; display: flex; align-items: center; justify-content: center; gap: .4rem;">
+            <span class="icon-svg" style="color: var(--amber-500);"><svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span> AgroMaíz
+          </div>
+          <small style="font-size: .5rem; color: var(--green-600); text-transform: uppercase; letter-spacing: 1px;">Cultiva mejor, cosecha más</small>
+        </div>
+      </div>
+    </header>
+
+    
+
+    <main>
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <h1 style="font-size: 1.4rem; margin-bottom: .5rem;">Monitoreo de plagas</h1>
+        <p style="font-size: .85rem; color: var(--gray-600);">Revisa las plagas más comunes en tu cultivo y actúa a tiempo para proteger tu producción.</p>
+      </div>
+
+      <div class="info-card-header">
+        <span class="icon-svg"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+        <h3 style="font-family: var(--font-body); font-weight: 700;">¿Qué plagas monitorear?</h3>
+      </div>
+      <p style="font-size: .85rem; color: var(--gray-600); margin-bottom: 1rem;">Revisa las plagas más comunes del maíz.</p>
+
+      <div class="pest-card">
+        <img src="../assets/img/gusano-cogollero.jpg" alt="Gusano Cogollero">
+        <div class="pest-content">
+          <h4>1. Gusano Cogollero<br><i style="font-size:.75rem; color:var(--gray-500); font-weight:normal;">(Spodoptera frugiperda)</i></h4>
+          <p><strong>Daño:</strong> Afecta las hojas y cogollos, reduciendo el crecimiento y la fotosíntesis.</p>
+          <p><strong>Señales:</strong> Hojas con huecos, excremento en el cogollo y plantas debilitadas.</p>
+        </div>
+      </div>
+
+      <div class="pest-card">
+        <img src="../assets/img/barrenador.jpg" alt="Barrenador del Tallo">
+        <div class="pest-content">
+          <h4>2. Barrenador del Tallo<br><i style="font-size:.75rem; color:var(--gray-500); font-weight:normal;">(Ostrinia nubilalis)</i></h4>
+          <p><strong>Daño:</strong> Perfora los tallos y mazorcas, causando roturas y reduciendo el rendimiento.</p>
+          <p><strong>Señales:</strong> Agujeros en tallos o mazorcas, aserrín en las perforaciones y plantas quebradas.</p>
+        </div>
+      </div>
+
+      <div class="pest-card">
+        <img src="../assets/img/pulgon-maiz.jpg" alt="Pulgón del Maíz">
+        <div class="pest-content">
+          <h4>3. Pulgón del Maíz<br><i style="font-size:.75rem; color:var(--gray-500); font-weight:normal;">(Rhopalosiphum maidis)</i></h4>
+          <p><strong>Daño:</strong> Chupa la savia, debilitando la planta y transmitiendo enfermedades virales.</p>
+          <p><strong>Señales:</strong> Colonias de pulgones en hojas, hojas amarillas y plantas con crecimiento lento.</p>
+        </div>
+      </div>
+
+      <div class="pest-card">
+        <img src="../assets/img/trips.jpg" alt="Trips del Maíz">
+        <div class="pest-content">
+          <h4>4. Trips del Maíz<br><i style="font-size:.75rem; color:var(--gray-500); font-weight:normal;">(Frankliniella williamsi)</i></h4>
+          <p><strong>Daño:</strong> Dañan las hojas y flores, afectando la polinización y el desarrollo de los granos.</p>
+          <p><strong>Señales:</strong> Rayas plateadas en las hojas, daño en flores y granos pequeños o deformes.</p>
+        </div>
+      </div>
+
+      <div class="info-card-box white" style="margin-top: 1.5rem;">
+        <div class="info-card-header">
+          <span class="icon-svg"><svg viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.3 1.5 1.5 2.5"></path><line x1="9" y1="18" x2="15" y2="18"></line><line x1="10" y1="22" x2="14" y2="22"></line></svg></span>
+          <h3 style="font-family: var(--font-body); font-weight: 700;">¿Qué hacer?</h3>
+        </div>
+        <ul class="icon-list">
+          <li>
+            <span class="il-icon icon-svg"><svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg></span>
+            <p>Revisa tu cultivo 2 veces por semana, especialmente el envés de las hojas y el cogollo.</p>
+          </li>
+          <li>
+            <span class="il-icon icon-svg"><svg viewBox="0 0 24 24"><path d="M18 11V6a2 2 0 0 0-4 0v4"></path><path d="M14 10V5a2 2 0 0 0-4 0v5"></path><path d="M10 10.5V4a2 2 0 0 0-4 0v7.5"></path><path d="M6 13.5V9a2 2 0 0 0-4 0v7a8 8 0 0 0 8 8h2a8 8 0 0 0 8-8v-5a2 2 0 0 0-4 0v3"></path></svg></span>
+            <p>Si encuentras pocas plagas, retíralas a mano o con agua a presión.</p>
+          </li>
+          <li>
+            <span class="il-icon icon-svg"><svg viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path></svg></span>
+            <p>Si la plaga aumenta, aplica un control biológico o un insecticida recomendado según la etiqueta.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="info-card-box" style="background: #F0FDF4; border-color: #DCFCE7;">
+        <div class="info-card-header">
+          <span class="icon-svg" style="color: #166534;"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21 12 17.27 5.82 21 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></span>
+          <h3 style="color: #166534; font-family: var(--font-body); font-weight: 700;">Recomendación</h3>
+        </div>
+        <p style="color: #166534;">Detectar a tiempo es la clave.<br>Un monitoreo constante te ayuda a tomar mejores decisiones y proteger tu cultivo.</p>
+      </div>
+
+      <button type="button" onclick="window.location.href='que-hacer.html'" class="btn-primary full-center" style="margin-top: 1rem;">Continuar →</button>
+    </main>
+  </div>
+  <!-- Botón flotante AgroBot -->
+  <a href="asistente.html" class="chat-fab" aria-label="Abrir AgroBot">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <span class="chat-fab-pulse"></span>
+  </a>
+  <link rel="stylesheet" href="../css/asistente.css" />
+
+<script src="../js/config.js"></script>
+  <script src="../js/api.js"></script>  
+<script>                              
+  requireAuth();
+  const u = Auth.getUsuario();
+  if (u) document.querySelectorAll('.usuario-nombre').forEach(el => el.textContent = u.nombre);
+</script>
+</body>
+</html>

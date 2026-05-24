@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cultivo — AgroMaíz</title>
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/app.css" />
+    <link rel="stylesheet" href="../css/mi-cultivo.css">
+</head>
+<body class="app-layout">
+<div class="app-container">
+    <header class="app-header">
+        <a href="dashboard.html" class="app-header-back" aria-label="Volver"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></a>
+        <div class="app-header-title">Mi Cultivo</div>
+        <div style="width:24px"></div>
+    </header>
+
+    <main id="main-content" style="padding-bottom:1rem">
+        <!-- Contenido inyectado por JS -->
+        <div id="skeleton-wrap">
+        <div class="skeleton" style="height:130px;margin-bottom:1.25rem"></div>
+        <div class="skeleton" style="height:110px;margin-bottom:1.25rem"></div>
+        <div class="datos-grid">
+            <div class="skeleton" style="height:80px"></div>
+            <div class="skeleton" style="height:80px"></div>
+            <div class="skeleton" style="height:80px"></div>
+            <div class="skeleton" style="height:80px"></div>
+        </div>
+        </div>
+    </main>
+
+</div>
+
+<nav class="bottom-nav">
+    <a href="dashboard.html" class="nav-item">
+        <svg viewBox="0 0 24 24" width="24" height="24" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        <span>Inicio</span>
+    </a>
+    <a href="#" class="nav-item">
+        <svg viewBox="0 0 24 24" width="24" height="24" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+        <span>Aprender</span>
+    </a>
+    <a href="#" class="nav-item">
+        <svg viewBox="0 0 24 24" width="24" height="24" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        <span class="usuario-nombre">Perfil</span>
+    </a>
+    <button onclick="Auth.cerrarSesion()" class="nav-item" style="background:none;border:none;cursor:pointer;">
+        <svg viewBox="0 0 24 24" width="24" height="24" stroke-width="2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+        <span>Salir</span>
+    </button>
+</nav>
+
+<a href="asistente.html" class="chat-fab" aria-label="Abrir AgroBot">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <span class="chat-fab-pulse"></span>
+</a>
+<link rel="stylesheet" href="../css/asistente.css" />
+
+<script src="../js/config.js"></script>
+  <script src="../js/api.js"></script>
+<script>
+requireAuth();
+const u = Auth.getUsuario();
+if (u) document.querySelectorAll('.usuario-nombre').forEach(el => el.textContent = u.nombre);
+</script>
+<script>
+/* ── Helpers ─────────────────────────────────────────── */
+function diasDesde(fecha) {
+    if (!fecha) return null;
+    const plain = fecha.length > 10 ? fecha.slice(0, 10) : fecha;
+    return Math.floor((Date.now() - new Date(plain + 'T12:00:00')) / 86400000);
+}
+
+function etapaFenologica(dias) {
+    if (dias === null) return { nombre: 'No determinada', porcentaje: 0, icono: '🌱', detalle: '' };
+    if (dias < 10)  return { nombre: 'Siembra y emergencia',              porcentaje: 5,  icono: '🌱', detalle: `Día ${dias} — las plántulas están emergiendo del suelo.` };
+    if (dias < 30)  return { nombre: 'Crecimiento vegetativo temprano',   porcentaje: 25, icono: '🌿', detalle: `Día ${dias} — etapa V3 a V6. Desarrollo de hojas y raíces.` };
+    if (dias < 50)  return { nombre: 'Crecimiento vegetativo tardío',     porcentaje: 45, icono: '🌾', detalle: `Día ${dias} — etapa V6 a V10. Planta alcanzando altura máxima.` };
+    if (dias < 70)  return { nombre: 'Floración y polinización',          porcentaje: 65, icono: '🌸', detalle: `Día ${dias} — etapa VT/R1. Período crítico para el rendimiento.` };
+    if (dias < 100) return { nombre: 'Llenado de grano',                  porcentaje: 82, icono: '🌽', detalle: `Día ${dias} — etapa R2 a R4. El grano está acumulando almidón.` };
+    return             { nombre: 'Madurez y cosecha',                     porcentaje: 98, icono: '🏆', detalle: `Día ${dias} — etapa R5 a R6. Evaluando punto de cosecha.` };
+}
+
+function labelSuelo(val) {
+    return { arenoso: 'Arenoso', limoso: 'Limoso', arcilloso: 'Arcilloso' }[val] || val || '—';
+}
+function iconoSuelo(val) {
+    return { arenoso: '🏜️', limoso: '🌍', arcilloso: '🧱' }[val] || '🪨';
+}
+function labelPH(val) {
+    return {
+        acido: 'Ácido (< 6)', lig_acido: 'Lig. ácido (6–6.5)',
+        neutro: 'Neutro (6.5–7.5)', lig_alca: 'Lig. alcalino (7.5–8)', alca: 'Alcalino (> 8)'
+    }[val] || val || '—';
+}
+function labelManejo(val) {
+    return { lluvia: 'Solo lluvia', riego: 'Con riego' }[val] || val || '—';
+}
+function iconoClima(codigo) {
+    if (codigo === 0) return '☀️';
+    if (codigo <= 2)  return '🌤️';
+    if (codigo <= 3)  return '☁️';
+    if (codigo <= 48) return '🌫️';
+    if (codigo <= 65) return '🌧️';
+    return '⛈️';
+}
+
+/* ── Generar alertas según datos del cultivo ─────────── */
+function generarAlertas(cultivo, dias) {
+    const alertas = [];
+
+    // Etapa crítica
+    if (dias >= 55 && dias <= 75) {
+        alertas.push({ tipo: 'risk', icono: '🌸', texto: '<strong>Etapa crítica:</strong> Tu maíz está en floración. Evita el estrés hídrico — una falta de agua ahora puede reducir el rendimiento hasta un 50%.' });
+    }
+
+    // pH
+    if (cultivo.ph_suelo === 'acido' || cultivo.ph_suelo === 'alca') {
+        alertas.push({ tipo: 'warn', icono: '⚗️', texto: `<strong>Alerta de pH:</strong> Tu suelo es ${labelPH(cultivo.ph_suelo).toLowerCase()}. Esto puede limitar la absorción de nutrientes. Considera encalar (si es ácido) o aplicar azufre (si es alcalino).` });
+    }
+
+    // Sin análisis de suelo
+    if (!cultivo.tiene_analisis) {
+        alertas.push({ tipo: 'info', icono: '🔬', texto: '<strong>Sin análisis de suelo:</strong> Tener un análisis te permitiría fertilizar con precisión y ahorrar costos. Consulta con tu agrónomo local.' });
+    }
+
+    // Suelo arenoso
+    if (cultivo.tipo_suelo === 'arenoso' && cultivo.tipo_manejo === 'lluvia') {
+        alertas.push({ tipo: 'warn', icono: '💧', texto: '<strong>Retención de agua:</strong> El suelo arenoso drena rápido. En épocas de poca lluvia, tu cultivo puede sufrir estrés hídrico. Monitorea el suelo frecuentemente.' });
+    }
+
+    // Días avanzados sin cosecha
+    if (dias > 110) {
+        alertas.push({ tipo: 'warn', icono: '📅', texto: '<strong>Tiempo de cosecha:</strong> Tu cultivo supera los 110 días. Evalúa el punto de madurez fisiológica para programar la cosecha.' });
+    }
+
+    // Todo bien
+    if (alertas.length === 0) {
+        alertas.push({ tipo: 'ok', icono: '✅', texto: '<strong>Sin alertas activas.</strong> Tu cultivo está en buen estado según los datos registrados. Continúa monitoreando regularmente.' });
+    }
+
+    return alertas;
+}
+
+/* ── Renderizar estado vacío ─────────────────────────── */
+function renderVacio() {
+    document.getElementById('main-content').innerHTML = `
+        <div class="empty-state">
+        <div class="empty-icon">🌱</div>
+        <h2>Aún no tienes un cultivo registrado</h2>
+        <p>Registra tu cultivo de maíz para recibir recomendaciones personalizadas, monitorear su progreso y consultar el pronóstico del clima.</p>
+        <a href="registrar-cultivo.html" class="btn-registrar">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Registrar mi cultivo
+        </a>
+        </div>`;
+}
+
+/* ── Renderizar detalle del cultivo ──────────────────── */
+function renderCultivo(cultivo, pronostico) {
+    const dias   = diasDesde(cultivo.fecha_siembra);
+    const etapa  = etapaFenologica(dias);
+    const alertas = generarAlertas(cultivo, dias);
+
+    const lugar = [cultivo.municipio, cultivo.departamento].filter(Boolean).join(', ') || 'Ubicación no registrada';
+    const fechaStr = cultivo.fecha_siembra
+        ? (() => {
+            // El API puede devolver ISO completo (2024-03-15T00:00:00.000Z) o solo YYYY-MM-DD
+            const raw = cultivo.fecha_siembra;
+            const plain = raw.length > 10 ? raw.slice(0, 10) : raw;
+            return new Date(plain + 'T12:00:00').toLocaleDateString('es-CO', { day: 'numeric', month: 'long', year: 'numeric' });
+          })()
+        : '—';
+
+    // Pronóstico mini
+    let climaHTML = '';
+    if (pronostico?.length) {
+        climaHTML = `
+        <div class="clima-mini-card">
+            <div class="clima-mini-title">🌤️ Pronóstico — próximos días</div>
+            <div class="clima-mini-row">
+            ${pronostico.slice(0, 7).map((dia, i) => {
+                const fecha = new Date(dia.fecha + 'T12:00:00');
+                const label = i === 0 ? 'Hoy' : fecha.toLocaleDateString('es-CO', { weekday: 'short' });
+                return `
+                <div class="clima-dia-mini ${i === 0 ? 'hoy' : ''}">
+                    <div class="dia-label">${label}</div>
+                    <div class="dia-icon">${iconoClima(dia.codigo_clima)}</div>
+                    <div class="dia-temp">${Math.round(dia.temp_max)}°/${Math.round(dia.temp_min)}°</div>
+                    <div class="dia-lluvia">💧${dia.prob_lluvia ?? '--'}%</div>
+                </div>`;
+            }).join('')}
+            </div>
+        </div>`;
+    }
+
+    // Alertas
+    const alertasHTML = alertas.map(a => `
+        <div class="alerta-item ${a.tipo}">
+        <span class="alerta-icon">${a.icono}</span>
+        <span class="alerta-texto">${a.texto}</span>
+        </div>`).join('');
+
+    document.getElementById('main-content').innerHTML = `
+        <!-- Hero -->
+        <div class="cultivo-hero">
+        <div class="cultivo-hero-label">📍 Ubicación del cultivo</div>
+        <div class="cultivo-hero-lugar">${lugar}</div>
+        <div class="cultivo-hero-badges">
+            <span class="hero-badge">${etapa.icono} ${etapa.nombre}</span>
+            <span class="hero-badge">📅 Día ${dias ?? '—'}</span>
+            <span class="hero-badge">💧 ${labelManejo(cultivo.tipo_manejo)}</span>
+        </div>
+        </div>
+
+        <!-- Etapa fenológica -->
+        <div class="etapa-card">
+        <div class="etapa-header">
+            <div class="etapa-icon">${etapa.icono}</div>
+            <div>
+            <div class="etapa-title">${etapa.nombre}</div>
+            <div class="etapa-sub">${etapa.detalle}</div>
+            </div>
+        </div>
+        <div class="progress-bar-wrap">
+            <div class="progress-bar-fill" style="width:${etapa.porcentaje}%"></div>
+        </div>
+        <div class="progress-labels">
+            <span>Siembra</span>
+            <span>Floración</span>
+            <span>Cosecha</span>
+        </div>
+        </div>
+
+        <!-- Datos del cultivo -->
+        <div class="datos-grid">
+        <div class="dato-card">
+            <div class="dato-label">Fecha de siembra</div>
+            <div class="dato-valor">📅 ${fechaStr}</div>
+        </div>
+        <div class="dato-card">
+            <div class="dato-label">Días transcurridos</div>
+            <div class="dato-valor" style="font-size:1.4rem">${dias ?? '—'}</div>
+            <div class="dato-sub">días desde la siembra</div>
+        </div>
+        <div class="dato-card">
+            <div class="dato-label">Tipo de suelo</div>
+            <div class="dato-valor">${iconoSuelo(cultivo.tipo_suelo)} ${labelSuelo(cultivo.tipo_suelo)}</div>
+        </div>
+        <div class="dato-card">
+            <div class="dato-label">pH del suelo</div>
+            <div class="dato-valor">⚗️</div>
+            <div class="dato-sub">${labelPH(cultivo.ph_suelo)}</div>
+        </div>
+        <div class="dato-card full">
+            <div class="dato-label">Análisis de suelo</div>
+            <div class="dato-valor">${cultivo.tiene_analisis ? '✅ Sí tiene análisis' : '❌ Sin análisis de suelo'}</div>
+        </div>
+        </div>
+
+        <!-- Alertas -->
+        <div class="alertas-section">
+        <div class="alertas-title">⚡ Alertas y recomendaciones</div>
+        ${alertasHTML}
+        </div>
+
+        <!-- Clima -->
+        ${climaHTML}
+
+        <!-- Botón editar -->
+        <button class="btn-editar" onclick="window.location.href='registrar-cultivo.html'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        Actualizar datos del cultivo
+        </button>`;
+}
+
+/* ── Inicializar ─────────────────────────────────────── */
+async function init() {
+    try {
+        // 1. Consultar cultivo
+        const { ok, datos } = await CultivoService.obtener();
+
+        if (!ok || !datos.cultivo) {
+        renderVacio();
+        return;
+        }
+
+        const cultivo = datos.cultivo;
+
+        // 2. Consultar pronóstico si hay coordenadas
+        let pronostico = null;
+        if (cultivo.latitud && cultivo.longitud) {
+        try {
+            const climaRes = await ClimaService.obtenerPronostico(cultivo.latitud, cultivo.longitud);
+            if (climaRes.ok) pronostico = climaRes.datos.pronostico;
+        } catch (_) { /* no crítico */ }
+        }
+
+        renderCultivo(cultivo, pronostico);
+
+    } catch (err) {
+        console.error('Error cargando cultivo:', err);
+        document.getElementById('main-content').innerHTML = `
+        <div class="empty-state">
+            <div class="empty-icon">⚠️</div>
+            <h2>Error al cargar</h2>
+            <p>No se pudo conectar al servidor. Verifica tu conexión e intenta de nuevo.</p>
+            <a href="mi-cultivo.html" class="btn-registrar" style="background:var(--gray-600)">Reintentar</a>
+        </div>`;
+    }
+}
+
+init();
+</script>
+</body>
+</html>

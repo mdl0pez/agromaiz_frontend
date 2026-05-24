@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgroMaíz — Tu cultivo, nuestras recomendaciones</title>
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/home.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar" id="navbar">
+    <nav class="nav-container">
+      <a href="index.html" class="nav-logo" aria-label="AgroMaíz inicio">
+        <span class="logo-icon">🌽</span>
+        <span class="logo-text">AgroMaíz</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#como-funciona">¿Cómo funciona?</a></li>
+        <li><a href="pages/login.html" class="btn-nav-outline">Iniciar sesión</a></li>
+        <li><a href="pages/register.html" class="btn-nav-solid">Comenzar</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===== HERO ===== -->
+    <section class="hero" aria-label="Sección principal">
+      <div class="hero-bg">
+        <div class="hero-grain"></div>
+        <div class="hero-gradient"></div>
+        <div class="hero-particles" aria-hidden="true">
+          <span class="particle p1">🌽</span>
+          <span class="particle p2">🌿</span>
+          <span class="particle p3">☀️</span>
+          <span class="particle p4">💧</span>
+          <span class="particle p5">🌱</span>
+        </div>
+      </div>
+      <div class="hero-content container">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          Plataforma agro-tecnológica
+        </div>
+        <h1 class="hero-title">
+          Cultiva más inteligente,<br />
+          <em>cosecha mejor</em>
+        </h1>
+        <p class="hero-desc">
+          AgroMaíz te acompaña en cada etapa de tu cultivo de maíz con recomendaciones precisas, diagnóstico rápido y gestión agronómica personalizada.
+        </p>
+        <div class="hero-actions">
+          <a href="pages/register.html" class="btn-primary">
+            Empezar gratis
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <a href="#como-funciona" class="btn-ghost">Ver cómo funciona</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><strong>3</strong><span>módulos principales</span></div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat"><strong>100%</strong><span>enfoque en maíz</span></div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat"><strong>0</strong><span>conocimiento técnico requerido</span></div>
+        </div>
+      </div>
+
+      <!-- Floating phone mockup -->
+      <div class="hero-mockup" aria-hidden="true">
+        <div class="phone-shell">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="app-status-bar">
+              <span>9:41</span>
+              <span class="status-icons">▲▲ 🔋</span>
+            </div>
+            <div class="app-top-bar">
+              <div class="app-logo-sm">🌽 <strong>AgroMaíz</strong></div>
+              <div class="app-help">?<span>Ayuda</span></div>
+            </div>
+            <div class="app-welcome-box">
+              <div class="leaf-deco">🌿 🌿</div>
+              <div class="app-welcome-title">¡Bienvenido!</div>
+              <div class="app-welcome-sub">Todo lo que necesitas para tomar mejores decisiones en tu cultivo de maíz.</div>
+            </div>
+            <div class="app-cards">
+              <div class="app-card green">
+                <div class="app-card-icon-wrap green-bg">🌱</div>
+                <div class="app-card-body">
+                  <strong>Mi cultivo</strong>
+                  <p>Consulta el estado de tu cultivo, recomendaciones y plan de manejo personalizado.</p>
+                </div>
+                <span class="app-card-arrow">›</span>
+              </div>
+              <div class="app-card yellow">
+                <div class="app-card-icon-wrap yellow-bg">🔍</div>
+                <div class="app-card-body">
+                  <strong>Diagnóstico rápido</strong>
+                  <p>Identifica posibles problemas en tu cultivo y recibe recomendaciones inmediatas.</p>
+                </div>
+                <span class="app-card-arrow">›</span>
+              </div>
+              <div class="app-card teal">
+                <div class="app-card-icon-wrap teal-bg">📚</div>
+                <div class="app-card-body">
+                  <strong>Aprender</strong>
+                  <p>Aprende sobre el cultivo de maíz y mejora tus prácticas agrícolas.</p>
+                </div>
+                <span class="app-card-arrow">›</span>
+              </div>
+            </div>
+            <div class="app-bottom-bar">
+              <div class="abb-item active"><span class="abb-icon">🏠</span><span class="abb-label">Inicio</span></div>
+              <div class="abb-item"><span class="abb-icon">📚</span><span class="abb-label">Aprender</span></div>
+              <div class="abb-item"><span class="abb-icon">👤</span><span class="abb-label">Perfil</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CÓMO FUNCIONA ===== -->
+    <section class="how-it-works" id="como-funciona" aria-labelledby="how-title">
+      <div class="container">
+        <header class="section-header light">
+          <span class="section-tag alt">Flujo principal</span>
+          <h2 id="how-title">Así de simple es<br />usar AgroMaíz</h2>
+        </header>
+        <ol class="steps-list" aria-label="Pasos para usar AgroMaíz">
+          <li class="step">
+            <div class="step-number" aria-hidden="true">01</div>
+            <div class="step-body">
+              <h3>Crea tu cuenta</h3>
+              <p>Regístrate de forma gratuita. Solo necesitas un correo y una contraseña para empezar.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-number" aria-hidden="true">02</div>
+            <div class="step-body">
+              <h3>Registra tu cultivo</h3>
+              <p>Ingresa tu ubicación, fecha de siembra y tipo de manejo. Sin análisis de laboratorio ni datos complejos.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-number" aria-hidden="true">03</div>
+            <div class="step-body">
+              <h3>Recibe tu cronograma</h3>
+              <p>AgroMaíz genera un plan de manejo personalizado basado en tu cultivo y condiciones locales.</p>
+            </div>
+          </li>
+          <li class="step">
+            <div class="step-number" aria-hidden="true">04</div>
+            <div class="step-body">
+              <h3>Toma mejores decisiones</h3>
+              <p>Consulta diariamente qué hacer, diagnostica problemas y aprende más sobre tu cultivo.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta-section" aria-label="Llamado a la acción">
+      <div class="container">
+        <div class="cta-box">
+          <h2>Empieza a cultivar de forma inteligente</h2>
+          <p>Únete a AgroMaíz y lleva tu cultivo de maíz al siguiente nivel con tecnología al alcance de tu mano.</p>
+          <div class="cta-actions">
+            <a href="pages/register.html" class="btn-primary">Crear cuenta gratis</a>
+            <a href="pages/login.html" class="btn-ghost-dark">Ya tengo cuenta</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="logo-icon">🌽</span>
+          <span class="logo-text">AgroMaíz</span>
+          <p>Tu cultivo, nuestras recomendaciones.</p>
+        </div>
+        <nav class="footer-links" aria-label="Enlaces del footer">
+          <a href="#como-funciona">¿Cómo funciona?</a>
+          <a href="pages/login.html">Iniciar sesión</a>
+          <a href="pages/register.html">Registrarse</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <small>© 2026 AgroMaíz — Facultad de Ingeniería. Desarrollado por Heliana Romero, María Vergara, Luz Angel Rivera, Yeiner Fuentes, Mateo López.</small>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/navbar.js"></script>
+</body>
+</html>

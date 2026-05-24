@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manejo del Agua — AgroMaíz</title>
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/app.css" />
+  <link rel="stylesheet" href="../css/aprender.css" />
+</head>
+<body class="app-layout">
+<div class="app-container">
+
+  <header class="app-header">
+    <a href="aprender.html" class="app-header-back" aria-label="Volver"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></a>
+    <div class="app-header-title">Manejo del Agua</div>
+    <div style="width:38px"></div>
+  </header>
+
+  <main>
+    <div class="learn-page-hero hero-blue" data-emoji="💧">
+      <h1>💧 Manejo del Agua</h1>
+      <p>Optimiza la lluvia natural y conserva la humedad para maximizar el rendimiento de tu maíz.</p>
+    </div>
+
+    <!-- Pronóstico real del backend -->
+    <div id="clima-wrap">
+      <div class="learn-section" style="text-align:center;color:var(--text-muted);font-size:.85rem;padding:1.5rem">
+        ⏳ Cargando pronóstico de lluvia...
+      </div>
+    </div>
+
+    <!-- Cuánta agua necesita el maíz -->
+    <div class="learn-section">
+      <div class="learn-section-title">
+        <span class="s-icon">📏</span>
+        ¿Cuánta agua necesita el maíz?
+      </div>
+      <div class="tip-list">
+        <div class="tip-item">
+          <span class="tip-item-icon">🌱</span>
+          <p><strong>Siembra–V6 (0–30 días):</strong> 25–50 mm/semana. Riego suave y frecuente para no compactar el suelo.</p>
+        </div>
+        <div class="tip-item">
+          <span class="tip-item-icon">🌾</span>
+          <p><strong>V6–VT (30–60 días):</strong> 50–75 mm/semana. Alta demanda. Si no llueve en 7 días, riegas o aplicas mulch (material orgánico como hojas o recortes de césped).</p>
+        </div>
+        <div class="tip-item">
+          <span class="tip-item-icon">🌸</span>
+          <p><strong>Floración (60–75 días):</strong> 75–100 mm/semana. <strong>Período más crítico.</strong> Nunca dejes el suelo seco.</p>
+        </div>
+        <div class="tip-item">
+          <span class="tip-item-icon">🌽</span>
+          <p><strong>Llenado–Madurez (75–120 días):</strong> 25–50 mm/semana. Reducir gradualmente hacia la cosecha.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aprovechar lluvia natural -->
+    <div class="learn-section">
+      <div class="learn-section-title">
+        <span class="s-icon">🌧️</span>
+        Cómo aprovechar la lluvia natural
+      </div>
+      <div class="tip-list">
+        <div class="tip-item">
+          <span class="tip-item-icon">⛏️</span>
+          <p><strong>Labranza mínima:</strong> Arar lo menos posible mantiene los canales naturales del agua en el suelo.</p>
+        </div>
+        <div class="tip-item">
+          <span class="tip-item-icon">🌿</span>
+          <p><strong>Cobertura del suelo:</strong> Usa rastrojos o coberturas verdes para reducir la evaporación hasta un 40%.</p>
+        </div>
+        <div class="tip-item">
+          <span class="tip-item-icon">🏔️</span>
+          <p><strong>Curvas de nivel:</strong> En pendientes, siembra en curvas de nivel para captar la escorrentía y evitar erosión.</p>
+        </div>
+        <div class="tip-item">
+          <span class="tip-item-icon">🌱</span>
+          <p><strong>Fertiliza antes de lluvia:</strong> Aplica fertilizante 1–2 días antes de lluvia esperada para que el agua lo incorpore al suelo.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Suelos secos -->
+    <div class="learn-section">
+      <div class="learn-section-title">
+        <span class="s-icon">🏜️</span>
+        Consejos para suelos secos
+      </div>
+      <div class="tip-list">
+        <div class="tip-item">
+          <span class="tip-item-icon">👆</span>
+          <p><strong>Prueba del dedo:</strong> Introduce el dedo 5 cm en el suelo. Si está seco → necesita agua. Si está húmedo → espera.</p>
+        </div>
+        <div class="tip-item">
+          <span class="tip-item-icon">🌅</span>
+          <p><strong>Hora de riego:</strong> Riega temprano en la mañana (6–8 am) para reducir evaporación. Evita regar al mediodía.</p>
+        </div>
+        <div class="tip-item">
+          <span class="tip-item-icon">💧</span>
+          <p><strong>Riego por goteo:</strong> Si tienes acceso, aplica el agua directo a la raíz. Ahorra hasta 50% de agua vs riego por aspersión.</p>
+        </div>
+        <div class="tip-item">
+          <span class="tip-item-icon">🪨</span>
+          <p><strong>Mulching con piedras:</strong> Colocar piedras pequeñas alrededor de la planta reduce la evaporación del suelo.</p>
+        </div>
+      </div>
+
+      <div class="learn-alert risk" style="margin-top:.75rem">
+        <span class="learn-alert-icon">🚨</span>
+        <p><strong>Señales de estrés hídrico:</strong> Hojas enrolladas al mediodía, color opaco o grisáceo, tallos flácidos en la mañana. Actúa de inmediato.</p>
+      </div>
+    </div>
+
+    <!-- Encharcamiento -->
+    <div class="learn-section">
+      <div class="learn-section-title">
+        <span class="s-icon">🌊</span>
+        Qué hacer si hay exceso de agua
+      </div>
+      <div class="tip-list">
+        <div class="tip-item">
+          <span class="tip-item-icon">🚜</span>
+          <p><strong>Zanjas de drenaje:</strong> Abre zanjas superficiales entre surcos para evacuar el exceso de agua rápidamente.</p>
+        </div>
+        <div class="tip-item">
+          <span class="tip-item-icon">⚠️</span>
+          <p><strong>El maíz no tolera encharcamiento:</strong> Más de 48h con raíces anegadas causa daño irreversible. Actúa el mismo día que detectes el problema.</p>
+        </div>
+        <div class="tip-item">
+          <span class="tip-item-icon">🦠</span>
+          <p><strong>Post-encharcamiento:</strong> Aplica fungicida preventivo al suelo, ya que la humedad favorece hongos de raíz (Pythium, Fusarium).</p>
+        </div>
+      </div>
+    </div>
+
+    <button onclick="consultarAgroBot('¿Cuánto y cuándo debo regar mi cultivo de maíz según la etapa en que se encuentra actualmente?')" class="learn-cta">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Consultar plan de riego a AgroBot
+    </button>
+  </main>
+</div>
+
+<nav class="bottom-nav">
+  <a href="dashboard.html" class="nav-item">
+    <svg viewBox="0 0 24 24" width="24" height="24" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+    <span>Inicio</span>
+  </a>
+  <a href="aprender.html" class="nav-item active">
+    <svg viewBox="0 0 24 24" width="24" height="24" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+    <span>Aprender</span>
+  </a>
+  <a href="#" class="nav-item">
+    <svg viewBox="0 0 24 24" width="24" height="24" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+    <span class="usuario-nombre">Perfil</span>
+  </a>
+  <button onclick="Auth.cerrarSesion()" class="nav-item" style="background:none;border:none;cursor:pointer;">
+    <svg viewBox="0 0 24 24" width="24" height="24" stroke-width="2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+    <span>Salir</span>
+  </button>
+</nav>
+<a href="asistente.html" class="chat-fab" aria-label="Abrir AgroBot">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  <span class="chat-fab-pulse"></span>
+</a>
+<link rel="stylesheet" href="../css/asistente.css" />
+
+<script src="../js/config.js"></script>
+  <script src="../js/api.js"></script>
+<script>
+requireAuth();
+const u = Auth.getUsuario();
+if (u) document.querySelectorAll('.usuario-nombre').forEach(el => el.textContent = u.nombre);
+
+function iconoClima(c) {
+  if (c === 0) return '☀️';
+  if (c <= 2)  return '🌤️';
+  if (c <= 3)  return '☁️';
+  if (c <= 48) return '🌫️';
+  if (c <= 65) return '🌧️';
+  return '⛈️';
+}
+
+(async () => {
+  const wrap = document.getElementById('clima-wrap');
+  try {
+    const { ok: okC, datos: dc } = await CultivoService.obtener();
+    if (!okC || !dc.cultivo?.latitud) {
+      wrap.innerHTML = `
+        <div class="learn-section">
+          <div class="learn-section-title"><span class="s-icon">🌤️</span>Pronóstico de lluvia</div>
+          <div class="learn-alert info">
+            <span class="learn-alert-icon">📍</span>
+            <p>Registra tu cultivo con ubicación GPS para ver el pronóstico de lluvia de tu zona aquí.</p>
+          </div>
+        </div>`;
+      return;
+    }
+
+    const { ok, datos } = await ClimaService.obtenerPronostico(dc.cultivo.latitud, dc.cultivo.longitud);
+    if (!ok) throw new Error('Sin datos');
+
+    const hoy = new Date().toISOString().split('T')[0];
+    const lluviaTotal = datos.pronostico.slice(0,7).reduce((s, d) => s + (d.lluvia_mm || 0), 0);
+    const hayLluvia   = datos.pronostico.slice(0,3).some(d => d.prob_lluvia > 50);
+
+    wrap.innerHTML = `
+      <div class="learn-section" style="border-left:4px solid #3b82f6">
+        <div class="learn-section-title"><span class="s-icon">🌧️</span>Pronóstico de lluvia — próximos 7 días</div>
+        <div style="display:flex;gap:.4rem;overflow-x:auto;padding-bottom:.5rem;scrollbar-width:none">
+          ${datos.pronostico.slice(0,7).map((d,i) => {
+            const fecha = new Date(d.fecha+'T12:00:00');
+            const lbl   = i === 0 ? 'Hoy' : fecha.toLocaleDateString('es-CO',{weekday:'short'});
+            const esHoy = d.fecha === hoy;
+            return `
+              <div style="flex-shrink:0;text-align:center;background:${esHoy?'#eff6ff':'var(--surface)'};border:1px solid ${esHoy?'#bfdbfe':'var(--divider)'};border-radius:12px;padding:.6rem .5rem;min-width:56px">
+                <div style="font-size:.68rem;font-weight:700;color:var(--text-secondary)">${lbl}</div>
+                <div style="font-size:1.25rem;margin:.2rem 0">${iconoClima(d.codigo_clima)}</div>
+                <div style="font-size:.7rem;font-weight:700;color:#3b82f6">💧${d.prob_lluvia??'--'}%</div>
+                <div style="font-size:.65rem;color:var(--text-muted)">${d.lluvia_mm>0?d.lluvia_mm.toFixed(1)+'mm':''}</div>
+              </div>`;
+          }).join('')}
+        </div>
+        <div class="learn-alert ${hayLluvia ? 'ok' : 'warn'}" style="margin-top:.75rem">
+          <span class="learn-alert-icon">${hayLluvia ? '🌧️' : '☀️'}</span>
+          <p>${hayLluvia
+            ? `<strong>Lluvia próxima:</strong> Se esperan lluvias en los próximos 3 días (${lluviaTotal.toFixed(1)} mm totales en 7 días). Aprovecha para aplicar fertilizante antes.`
+            : `<strong>Sin lluvia próxima:</strong> No se esperan lluvias significativas. Monitorea la humedad del suelo diariamente${dc.cultivo.tipo_manejo==='riego'?' y planifica el riego':''}.`
+          }</p>
+        </div>
+      </div>`;
+  } catch (_) {
+    wrap.innerHTML = `
+      <div class="learn-section">
+        <div class="learn-section-title"><span class="s-icon">🌤️</span>Pronóstico de lluvia</div>
+        <div class="learn-alert warn">
+          <span class="learn-alert-icon">⚠️</span>
+          <p>No se pudo cargar el pronóstico. Verifica tu conexión e intenta de nuevo.</p>
+        </div>
+      </div>`;
+  }
+})();
+
+function consultarAgroBot(pregunta) {
+    sessionStorage.setItem('agrobot_consulta_pendiente', pregunta);
+    window.location.href = 'asistente.html';
+}
+</script>
+</body>
+</html>

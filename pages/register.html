@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crear cuenta — AgroMaíz</title>
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/auth.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<main class="auth-page">
+
+  <!-- ===== LEFT PANEL ===== -->
+  <aside class="auth-panel" aria-hidden="true">
+    <div class="panel-deco">
+      <div class="deco-circle c1"></div>
+      <div class="deco-circle c2"></div>
+      <div class="deco-circle c3"></div>
+    </div>
+
+    <a href="../index.html" class="panel-logo">
+      <span class="logo-icon">🌽</span>
+      <span>AgroMaíz</span>
+    </a>
+
+    <div class="panel-body">
+      <h2>Empieza a cultivar<br />de forma<br /><em style="font-style:italic;color:var(--green-300)">inteligente</em></h2>
+      <p>Crea tu cuenta gratuita y accede a herramientas de apoyo agronómico diseñadas para ti.</p>
+      <div class="panel-features">
+        <div class="panel-feature">
+          <div class="pf-icon">🆓</div>
+          <span>Registro completamente gratuito</span>
+        </div>
+        <div class="panel-feature">
+          <div class="pf-icon">⚡</div>
+          <span>Configura tu cultivo en minutos</span>
+        </div>
+        <div class="panel-feature">
+          <div class="pf-icon">📍</div>
+          <span>Recomendaciones adaptadas a tu zona</span>
+        </div>
+        <div class="panel-feature">
+          <div class="pf-icon">🔒</div>
+          <span>Tus datos siempre seguros y privados</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="panel-footer">© 2026 AgroMaíz — Facultad de Ingeniería</p>
+  </aside>
+
+  <!-- ===== FORM PANEL ===== -->
+  <section class="auth-form-panel">
+    <div class="auth-form-wrap">
+
+      <div class="auth-top-nav">
+        <a href="../index.html" class="auth-back">
+          ← Volver al inicio
+        </a>
+        <p class="auth-switch-text">
+          ¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a>
+        </p>
+      </div>
+
+      <header class="auth-heading">
+        <h1>Crear cuenta</h1>
+        <p>Completa el formulario para comenzar con AgroMaíz.</p>
+      </header>
+
+      <form class="auth-form" id="registerForm" novalidate>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">Nombre</label>
+            <div class="input-wrap">
+              <span class="input-icon">👤</span>
+              <input type="text" id="firstName" name="firstName"
+                placeholder="Carlos" autocomplete="given-name" required />
+            </div>
+            <span class="form-error" id="firstNameError" role="alert"></span>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Apellido</label>
+            <div class="input-wrap">
+              <span class="input-icon">👤</span>
+              <input type="text" id="lastName" name="lastName"
+                placeholder="López" autocomplete="family-name" required />
+            </div>
+            <span class="form-error" id="lastNameError" role="alert"></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="regEmail">Correo electrónico</label>
+          <div class="input-wrap">
+            <span class="input-icon">✉️</span>
+            <input type="email" id="regEmail" name="email"
+              placeholder="tu@correo.com" autocomplete="email" required />
+          </div>
+          <span class="form-error" id="regEmailError" role="alert"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="region">Departamento / Región</label>
+          <div class="input-wrap">
+            <span class="input-icon">📍</span>
+            <select id="region" name="region" required>
+              <option value="" disabled selected>Selecciona tu departamento</option>
+              <option>Amazonas</option>
+              <option>Antioquia</option>
+              <option>Arauca</option>
+              <option>Atlántico</option>
+              <option>Bolívar</option>
+              <option>Boyacá</option>
+              <option>Caldas</option>
+              <option>Caquetá</option>
+              <option>Casanare</option>
+              <option>Cauca</option>
+              <option>Cesar</option>
+              <option>Chocó</option>
+              <option>Córdoba</option>
+              <option>Cundinamarca</option>
+              <option>Guainía</option>
+              <option>Guaviare</option>
+              <option>Huila</option>
+              <option>La Guajira</option>
+              <option>Magdalena</option>
+              <option>Meta</option>
+              <option>Nariño</option>
+              <option>Norte de Santander</option>
+              <option>Putumayo</option>
+              <option>Quindío</option>
+              <option>Risaralda</option>
+              <option>San Andrés y Providencia</option>
+              <option>Santander</option>
+              <option>Sucre</option>
+              <option>Tolima</option>
+              <option>Valle del Cauca</option>
+              <option>Vaupés</option>
+              <option>Vichada</option>
+            </select>
+          </div>
+          <span class="form-error" id="regionError" role="alert"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="regPassword">Contraseña</label>
+          <div class="input-wrap">
+            <span class="input-icon">🔒</span>
+            <input type="password" id="regPassword" name="password"
+              placeholder="Mínimo 8 caracteres" autocomplete="new-password" required />
+            <button type="button" class="input-toggle" id="toggleRegPass" aria-label="Mostrar contraseña">👁️</button>
+          </div>
+          <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+          <p class="strength-text" id="strengthText"></p>
+          <span class="form-error" id="regPassError" role="alert"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPass">Confirmar contraseña</label>
+          <div class="input-wrap">
+            <span class="input-icon">🔒</span>
+            <input type="password" id="confirmPass" name="confirmPass"
+              placeholder="Repite tu contraseña" autocomplete="new-password" required />
+          </div>
+          <span class="form-error" id="confirmError" role="alert"></span>
+        </div>
+
+        <label class="form-check">
+          <input type="checkbox" id="terms" name="terms" required />
+          <span>Acepto los <a href="#">términos y condiciones</a> y la <a href="#">política de privacidad</a>.</span>
+        </label>
+        <span class="form-error" id="termsError" role="alert"></span>
+
+        <button type="submit" class="btn-submit" id="registerBtn">
+          <span class="btn-text">Crear mi cuenta gratis</span>
+          <div class="spinner"></div>
+        </button>
+
+      </form>
+
+      <!-- Success state -->
+      <div class="auth-success" id="registerSuccess" style="display:none; flex-direction:column; align-items:center; text-align:center; gap:1.25rem; padding:2rem 1rem;">
+        <!-- Círculo animado con check -->
+        <div style="
+          width:80px; height:80px; border-radius:50%;
+          background:linear-gradient(135deg,#2D6A4F,#52B788);
+          display:flex; align-items:center; justify-content:center;
+          box-shadow:0 8px 24px rgba(45,106,79,.35);
+          animation: popIn .5s cubic-bezier(0.175,0.885,0.32,1.275) both;
+        ">
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none"
+               stroke="white" stroke-width="3"
+               stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+
+        <div>
+          <h3 style="font-size:1.45rem; color:#1B4332; margin-bottom:.4rem;">
+            ¡Bienvenido a AgroMaíz!
+          </h3>
+          <p style="color:#4A6356; font-size:.92rem; line-height:1.6; max-width:320px;">
+            Tu cuenta fue creada exitosamente.<br>
+            Ahora registra tu cultivo para recibir recomendaciones personalizadas. 🌽
+          </p>
+        </div>
+
+        <!-- Barra de progreso de redirección -->
+        <div style="width:100%; max-width:280px;">
+          <div style="
+            height:4px; background:#E3EDE3; border-radius:4px; overflow:hidden;
+          ">
+            <div id="redirectBar" style="
+              height:100%; width:0%;
+              background:linear-gradient(90deg,#2D6A4F,#52B788);
+              border-radius:4px;
+              transition:width 4s linear;
+            "></div>
+          </div>
+          <p style="font-size:.75rem; color:#8AA899; margin-top:.5rem;">
+            Redirigiendo al registro de cultivo…
+          </p>
+        </div>
+      </div>
+
+      <style>
+        @keyframes popIn {
+          from { transform:scale(0); opacity:0; }
+          to   { transform:scale(1); opacity:1; }
+        }
+      </style>
+
+    </div>
+  </section>
+
+</main>
+
+<script src="../js/config.js"></script>
+  <script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/register.js"></script>
+</body>
+</html>
