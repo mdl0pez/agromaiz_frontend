@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abono Orgánico — AgroMaíz</title>
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/app.css" />
+</head>
+<body class="app-layout">
+
+  <div class="app-container" style="padding-bottom:100px;">
+    <header class="app-header" style="margin-bottom:1rem;">
+      <a href="fertilizacion.html" class="app-header-back" aria-label="Volver">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      </a>
+      <div class="app-header-title" style="font-size:1.3rem;display:flex;align-items:center;gap:.5rem;">
+        <img src="../assets/img/abono-organico.png" alt="Abono Orgánico" style="height:28px;"> Abono Orgánico
+      </div>
+      <div style="width:24px"></div>
+    </header>
+
+    <div style="text-align:center;margin-bottom:2rem;">
+      <span id="etapa-label" style="font-size:.85rem;color:var(--gray-600);font-weight:500;letter-spacing:1px;">SIEMBRA / PREPARACIÓN</span>
+    </div>
+
+    <main>
+      <div class="info-card-box" style="background:#F8FAF8;border-color:#E2E8E4;padding:1rem;">
+        <div style="display:flex;gap:.8rem;align-items:flex-start;">
+          <span style="font-size:1.5rem;color:var(--green-700);">🌿</span>
+          <p style="font-size:.9rem;color:var(--gray-900);font-weight:500;margin:0;">Los abonos orgánicos (compost, estiércol, humus de lombriz) mejoran la estructura del suelo, aumentan la capacidad de retención de agua y aportan nutrientes de liberación lenta de forma natural y sostenible.</p>
+        </div>
+      </div>
+
+      <!-- Tipos de abono orgánico -->
+      <h3 style="font-size:1rem;color:var(--green-900);font-weight:700;margin:1.5rem 0 .75rem;">Tipos de abono orgánico</h3>
+
+      <div style="display:flex;flex-direction:column;gap:.75rem;margin-bottom:1.5rem;">
+        <div class="grid-card" style="background:#F0FDF4;border-color:#DCFCE7;">
+          <div class="grid-card-head"><span class="icon">🍂</span><h4 style="color:#166534;">Compost</h4></div>
+          <p style="color:#166534;">Mezcla de residuos vegetales descompuestos. Rico en materia orgánica y microorganismos benéficos.</p>
+        </div>
+        <div class="grid-card" style="background:#FFFBEB;border-color:#FDE68A;">
+          <div class="grid-card-head"><span class="icon">🐄</span><h4 style="color:#92400E;">Estiércol</h4></div>
+          <p style="color:#78350F;">Excelente fuente de nutrientes. Debe estar bien compostado para evitar quema de raíces y contaminación.</p>
+        </div>
+        <div class="grid-card" style="background:#F5F3FF;border-color:#DDD6FE;">
+          <div class="grid-card-head"><span class="icon">🪱</span><h4 style="color:#5B21B6;">Humus de lombriz</h4></div>
+          <p style="color:#6D28D9;">El abono orgánico de mayor calidad. Alta concentración de nutrientes asimilables y microorganismos benéficos.</p>
+        </div>
+      </div>
+
+      <div class="info-card-header" style="margin-top:1rem;">
+        <span class="icon" style="color:var(--gray-700);">📅</span>
+        <h3 style="font-family:var(--font-body);font-weight:700;color:var(--gray-900);">¿Cuándo aplicar?</h3>
+      </div>
+      <p id="cuando-rec" style="font-size:.85rem;color:var(--gray-700);margin-left:2.25rem;">Idealmente en la preparación del terreno o al momento de la siembra. También se puede aplicar en etapa vegetativa temprana.</p>
+
+      <div class="info-card-header" style="margin-top:1.5rem;">
+        <span class="icon" style="color:var(--green-700);">🌱</span>
+        <h3 style="font-family:var(--font-body);font-weight:700;color:var(--gray-900);">Dosis recomendadas</h3>
+      </div>
+      <div class="grid-2" style="margin-top:.5rem;">
+        <div class="grid-card">
+          <div class="grid-card-head"><span class="icon">🍂</span><h4>Compost</h4></div>
+          <p>2 – 5 ton/ha<br>o 200 – 500 g por planta</p>
+        </div>
+        <div class="grid-card">
+          <div class="grid-card-head"><span class="icon">🐄</span><h4>Estiércol</h4></div>
+          <p>5 – 10 ton/ha<br>Bien compostado (mínimo 3 meses)</p>
+        </div>
+        <div class="grid-card" style="grid-column:1/-1;">
+          <div class="grid-card-head"><span class="icon">🪱</span><h4>Humus de lombriz</h4></div>
+          <p>1 – 3 ton/ha · Mayor eficiencia con menor cantidad. Aplica en el surco de siembra.</p>
+        </div>
+      </div>
+
+      <div class="info-card-header" style="margin-top:2rem;">
+        <span class="icon" style="color:var(--green-800);">🤲</span>
+        <h3 style="font-family:var(--font-body);font-weight:700;color:var(--gray-900);">¿Cómo aplicar?</h3>
+      </div>
+      <ol class="custom-ol" style="margin-left:2.25rem;">
+        <li>Incorpora el abono al suelo durante la preparación del terreno, mezclándolo con los primeros 20 cm de suelo.</li>
+        <li>En plantas establecidas, aplica en banda lateral a 10–15 cm del tallo y cúbrelo con tierra.</li>
+        <li>Riega después de la aplicación para activar los microorganismos y facilitar la absorción de nutrientes.</li>
+        <li>Si usas estiércol fresco, aplica al menos 30 días antes de la siembra para evitar fitotoxicidad.</li>
+      </ol>
+
+      <div class="info-card-header" style="margin-top:2rem;">
+        <span class="icon" style="color:var(--green-700);">🍃</span>
+        <h3 style="font-family:var(--font-body);font-weight:700;color:var(--gray-900);">Ventajas frente a fertilizantes químicos</h3>
+      </div>
+      <ul style="list-style:disc;padding-left:3.5rem;margin-bottom:2rem;color:var(--gray-700);font-size:.85rem;line-height:1.5;">
+        <li style="margin-bottom:.5rem;">Mejora la estructura y textura del suelo a largo plazo.</li>
+        <li style="margin-bottom:.5rem;">Aumenta la capacidad de retención de agua, reduciendo el estrés hídrico.</li>
+        <li style="margin-bottom:.5rem;">Estimula la actividad microbiana benéfica del suelo.</li>
+        <li style="margin-bottom:.5rem;">Menor riesgo de sobredosis y quema de raíces comparado con fertilizantes químicos.</li>
+        <li>Compatible con sistemas de producción orgánica y sostenible.</li>
+      </ul>
+
+      <div class="info-card-box" style="background:#F0FDF4;border-color:#DCFCE7;">
+        <div class="info-card-header">
+          <span class="icon" style="color:#166534;">🌱</span>
+          <h3 style="color:#166534;font-family:var(--font-body);font-weight:700;">Recuerda</h3>
+        </div>
+        <p style="color:#166534;">Los abonos orgánicos son una inversión a largo plazo en la salud de tu suelo. Combínalos con fertilizantes minerales para obtener el mayor beneficio.</p>
+      </div>
+    </main>
+  </div>
+
+  <a href="asistente.html" class="chat-fab" aria-label="Abrir AgroBot">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <span class="chat-fab-pulse"></span>
+  </a>
+  <link rel="stylesheet" href="../css/asistente.css" />
+
+  <script src="../js/config.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/cultivo-utils.js"></script>
+  <script>
+    requireAuth();
+    (async () => {
+      try {
+        const { cultivo } = await CultivoService.obtener();
+        if (!cultivo) return;
+        const { dias, etapa } = CultivoUtils.calcular(cultivo);
+        document.getElementById('etapa-label').textContent =
+          `${etapa.codigo} · DÍA ${dias} DESDE SIEMBRA`;
+
+        const msgs = {
+          siembra:            `Estás en siembra (día ${dias}). Es el mejor momento para incorporar abono orgánico al suelo antes de sembrar.`,
+          vegetativo_temprano:`En etapa vegetativa temprana (día ${dias}) puedes aplicar compost o humus en banda lateral para complementar la fertilización química.`,
+          vegetativo_medio:   `En etapa V6 (día ${dias}) una aplicación de humus de lombriz puede apoyar el desarrollo vegetativo.`,
+          prefloracion:       `En pre-floración (día ${dias}) evita remover el suelo cerca de las raíces. Aplica en superficie si es necesario.`,
+          floracion:          `Durante la floración (día ${dias}) no se recomienda aplicar abono orgánico. Prioriza el riego.`,
+          llenado:            `En llenado de grano (día ${dias}) el abono orgánico ya no tiene efecto en este ciclo. Planifica para el siguiente.`,
+          madurez:            `En madurez (día ${dias}) prepárate para la cosecha y planifica la incorporación de materia orgánica para el siguiente ciclo.`,
+        };
+        document.getElementById('cuando-rec').textContent =
+          msgs[etapa.id] || msgs.siembra;
+      } catch(e) { console.warn(e); }
+    })();
+  </script>
+</body>
+</html>

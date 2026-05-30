@@ -2,6 +2,6 @@
 // AgroMaíz — js/config.js
 // URL del backend.
 // LOCAL:      http://localhost:3000/api  (no tocar)
-// PRODUCCIÓN: cambia esto por tu URL de Railway después del deploy
+// PRODUCCIÓN: https://agromaizbackend-production.up.railway.app
 // ============================================================
 window.AGROMAIZ_API_URL = 'https://agromaizbackend-production.up.railway.app';

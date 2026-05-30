@@ -62,16 +62,13 @@
     text-decoration: none;
     color: inherit;
     box-shadow: var(--shadow-sm);
-    /* Transición unificada para todas las propiedades */
+    /* Separamos transition de animation para que hover funcione siempre */
     transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
     transform-origin: center center;
     position: relative;
     overflow: hidden;
-    opacity: 0;
-    transform: translateY(18px);
-    animation: slideUp .4s ease forwards;
-    pointer-events: auto; /* Fuerza la reactividad */
-    animation-fill-mode: forwards; /* Asegura que se quede en el estado final */
+    animation: cardFadeIn .4s ease both;
+    pointer-events: auto;
 }
 
 .learn-card:nth-child(1) { animation-delay: .05s; }
@@ -79,15 +76,22 @@
 .learn-card:nth-child(3) { animation-delay: .19s; }
 .learn-card:nth-child(4) { animation-delay: .26s; }
 
-@keyframes slideUp {
-    to { opacity: 1; transform: translateY(0); }
+@keyframes cardFadeIn {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 /* Efectos de interacción unificados para todas las tarjetas */
 .learn-card:hover {
-    transform: translateY(-4px) scale(1.02);
+    transform: translateY(-4px) scale(1.01);
     box-shadow: var(--shadow-md);
     border-color: var(--green-300);
+}
+
+/* Forzar reset de animation en hover para que transform funcione limpiamente */
+.learn-card:hover,
+.learn-card:focus {
+    animation-name: none;
 }
 
 .learn-card:active { 

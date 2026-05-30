@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aplicar DAP — AgroMaíz</title>
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/app.css" />
+</head>
+<body class="app-layout">
+
+  <div class="app-container" style="padding-bottom:100px;">
+    <header class="app-header" style="margin-bottom:1rem;">
+      <a href="fertilizacion.html" class="app-header-back" aria-label="Volver">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      </a>
+      <div class="app-header-title" style="font-size:1.3rem;display:flex;align-items:center;gap:.5rem;">
+        <img src="../assets/img/dap.png" alt="Icono DAP" style="height:28px;"> DAP
+      </div>
+      <div style="width:24px"></div>
+    </header>
+
+    <div style="text-align:center;margin-bottom:2rem;">
+      <span id="etapa-label" style="font-size:.85rem;color:var(--gray-600);font-weight:500;letter-spacing:1px;">ETAPA V3 - V4</span>
+    </div>
+
+    <main>
+      <div class="info-card-box" style="background:#F8FAF8;border-color:#E2E8E4;padding:1rem;">
+        <div style="display:flex;gap:.8rem;align-items:flex-start;">
+          <span style="font-size:1.5rem;color:var(--green-700);">🌿</span>
+          <p style="font-size:.9rem;color:var(--gray-900);font-weight:500;margin:0;">El DAP (Fosfato Diamónico) aporta fósforo y nitrógeno. Es especialmente útil en la siembra y en el inicio del desarrollo vegetativo para estimular el crecimiento radicular.</p>
+        </div>
+      </div>
+
+      <div class="info-card-header" style="margin-top:1.5rem;">
+        <span class="icon" style="color:var(--gray-700);">📅</span>
+        <h3 style="font-family:var(--font-body);font-weight:700;color:var(--gray-900);">Fecha recomendada</h3>
+      </div>
+      <p id="fecha-rec" style="font-size:.85rem;color:var(--gray-700);margin-left:2.25rem;">En siembra o primeros 15 días tras la emergencia.</p>
+
+      <div class="info-card-header" style="margin-top:1.5rem;">
+        <span class="icon" style="color:var(--green-700);">🌱</span>
+        <h3 style="font-family:var(--font-body);font-weight:700;color:var(--gray-900);">Dosis recomendada</h3>
+      </div>
+      <p style="font-size:.85rem;color:var(--gray-700);margin-left:2.25rem;">Aplica según el sistema de manejo en tu cultivo.</p>
+
+      <div class="grid-2">
+        <div class="grid-card" style="background:#F0F9FF;border-color:#E0F2FE;">
+          <div class="grid-card-head">
+            <span class="icon" style="color:#0284C7;">💧</span>
+            <h4 style="color:#0284C7;">Con riego</h4>
+          </div>
+          <p style="color:#0369A1;">80 – 100 kg/ha de DAP<br>(1.5 – 2 bultos de 50 kg/ha)</p>
+        </div>
+        <div class="grid-card" style="background:#F8FAFC;border-color:#E2E8F0;">
+          <div class="grid-card-head">
+            <span class="icon" style="color:#475569;">🌧️</span>
+            <h4 style="color:#334155;">Solo lluvia</h4>
+          </div>
+          <p style="color:#475569;">60 – 80 kg/ha de DAP<br>(1.2 – 1.6 bultos de 50 kg/ha)</p>
+        </div>
+      </div>
+
+      <div class="info-card-header" style="margin-top:2rem;">
+        <span class="icon" style="color:var(--green-800);">🤲</span>
+        <h3 style="font-family:var(--font-body);font-weight:700;color:var(--gray-900);">¿Cómo aplicarlo?</h3>
+      </div>
+      <ol class="custom-ol" style="margin-left:2.25rem;">
+        <li>Aplica el DAP en el surco de siembra o en banda lateral a 5–8 cm de la semilla, evitando el contacto directo.</li>
+        <li>En plantas establecidas, distribúyelo en banda al costado de la planta y cúbrelo ligeramente con tierra.</li>
+        <li>Aplica cuando haya humedad en el suelo o inmediatamente antes de una lluvia.</li>
+        <li>Evita mezclar DAP con cal o ceniza, ya que se pierde nitrógeno por volatilización.</li>
+      </ol>
+
+      <div class="info-card-header" style="margin-top:2rem;">
+        <span class="icon" style="color:var(--gray-600);">🌧️</span>
+        <h3 style="font-family:var(--font-body);font-weight:700;color:var(--gray-900);">Recomendaciones según el agua</h3>
+      </div>
+      <ul class="icon-list" style="margin-left:1rem;border:1px solid var(--gray-200);padding:1rem;border-radius:var(--radius-md);background:var(--gray-50);">
+        <li style="border-bottom:1px solid var(--gray-200);">
+          <span class="il-icon" style="color:#0284C7;">💧</span>
+          <p><strong>Con riego:</strong> aplica en el surco antes de sembrar o tras el riego para mejorar la absorción del fósforo.</p>
+        </li>
+        <li>
+          <span class="il-icon" style="color:#475569;">🌧️</span>
+          <p><strong>Solo lluvia:</strong> aplica justo antes de la lluvia para aprovechar el agua y facilitar la disolución del fertilizante en el suelo.</p>
+        </li>
+      </ul>
+
+      <div class="info-card-header" style="margin-top:2rem;">
+        <span class="icon" style="color:var(--green-700);">🍃</span>
+        <h3 style="font-family:var(--font-body);font-weight:700;color:var(--gray-900);">Recomendaciones importantes</h3>
+      </div>
+      <ul style="list-style:disc;padding-left:3.5rem;margin-bottom:2rem;color:var(--gray-700);font-size:.85rem;line-height:1.5;">
+        <li style="margin-bottom:.5rem;">El fósforo del DAP es menos móvil que el nitrógeno; aplícalo cerca de las raíces para mejor absorción.</li>
+        <li style="margin-bottom:.5rem;">Almacena en lugar seco: la humedad gruma el fertilizante y dificulta su aplicación.</li>
+        <li>Usa equipo de protección al manipularlo.</li>
+      </ul>
+
+      <div class="info-card-box" style="background:#F0FDF4;border-color:#DCFCE7;">
+        <div class="info-card-header">
+          <span class="icon" style="color:#166534;">🌱</span>
+          <h3 style="color:#166534;font-family:var(--font-body);font-weight:700;">Recuerda</h3>
+        </div>
+        <p style="color:#166534;">El fósforo es clave para el enraizamiento y el arranque del cultivo. Una buena aplicación inicial marca la diferencia en el rendimiento final.</p>
+      </div>
+    </main>
+  </div>
+
+  <a href="asistente.html" class="chat-fab" aria-label="Abrir AgroBot">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <span class="chat-fab-pulse"></span>
+  </a>
+  <link rel="stylesheet" href="../css/asistente.css" />
+
+  <script src="../js/config.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/cultivo-utils.js"></script>
+  <script>
+    requireAuth();
+    (async () => {
+      try {
+        const { cultivo } = await CultivoService.obtener();
+        if (!cultivo) return;
+        const { dias, etapa } = CultivoUtils.calcular(cultivo);
+        document.getElementById('etapa-label').textContent =
+          `${etapa.codigo} · DÍA ${dias} DESDE SIEMBRA`;
+        document.getElementById('fecha-rec').textContent =
+          `Ideal en los primeros 20 días tras la siembra. Actualmente en día ${dias} (${etapa.nombre}).`;
+      } catch(e) { console.warn(e); }
+    })();
+  </script>
+</body>
+</html>
