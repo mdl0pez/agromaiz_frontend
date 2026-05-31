@@ -121,10 +121,9 @@
 
     (async () => {
       try {
-        // ── CORRECCIÓN CLAVE: apiFetch devuelve {ok, status, datos}
-        // El cultivo está en resultado.datos.cultivo, no en resultado.cultivo
-        const resultado = await CultivoService.obtener();
-        const cultivo   = resultado?.datos?.cultivo ?? null;
+        // Patrón correcto igual que mi-cultivo.html y aprender-etapas.html
+        const { ok, datos } = await CultivoService.obtener();
+        const cultivo = (ok && datos?.cultivo) ? datos.cultivo : null;
 
         if (!cultivo) {
           document.getElementById('sin-cultivo').style.display  = 'block';
@@ -150,9 +149,33 @@
         document.getElementById('etapa-desc').innerHTML   =
           `${etapa.nombre}<br>(${etapa.codigo} — día ${dias})`;
 
-        // Tareas
+        // ── Descripción de fertilización según etapa ────────
+        const FERTI_DESC = {
+          siembra:            'Aún no es momento de fertilizar. Espera a la etapa V3–V4.',
+          vegetativo_temprano:'Primera aplicación de nitrógeno (Urea o DAP). Etapa ideal ahora.',
+          vegetativo_medio:   'Considera una segunda aplicación de nitrógeno si el cultivo lo requiere.',
+          prefloracion:       'Aplicación foliar si observas carencias nutricionales antes de la floración.',
+          floracion:          'No apliques fertilizantes granulados en floración. Prioriza el riego.',
+          llenado:            'El llenado del grano ya no responde a fertilización en este ciclo.',
+          madurez:            'No se aplica fertilizante. Prepara la cosecha.',
+        };
+
+        // Fertilización: siempre visible, descripción dinámica
         const lista = document.getElementById('tareas-lista');
-        etapa.tareas.forEach(t => {
+        const fertiEl = document.createElement('a');
+        fertiEl.href      = 'fertilizacion.html';
+        fertiEl.className = 'task-item';
+        fertiEl.innerHTML = `
+          <div class="icon">🌱</div>
+          <div class="content">
+            <h4>Fertilización</h4>
+            <p>${FERTI_DESC[etapa.id] || 'Aplica fertilizante según la etapa actual de tu cultivo.'}</p>
+          </div>
+          <div class="task-arrow">›</div>`;
+        lista.appendChild(fertiEl);
+
+        // Resto de tareas dinámicas (excluyendo fertilizacion para no duplicar)
+        etapa.tareas.filter(t => t.id !== 'fertilizacion').forEach(t => {
           const el     = document.createElement('a');
           el.href      = DESTINOS[t.id] || '#';
           el.className = 'task-item';

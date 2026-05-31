@@ -1,8 +1,8 @@
 /* ============================================================
-    AgroMaíz — js/cultivo-utils.js
-    Utilidades compartidas para calcular la etapa del cultivo
-    y personalizar el contenido según los datos registrados.
-    Incluir ANTES de los scripts de página.
+   AgroMaíz — js/cultivo-utils.js
+   Utilidades compartidas para calcular la etapa del cultivo
+   y personalizar el contenido según los datos registrados.
+   Incluir ANTES de los scripts de página.
    ============================================================ */
 
 window.CultivoUtils = (function () {
@@ -109,7 +109,9 @@ window.CultivoUtils = (function () {
 
   /* ── Calcular días desde siembra ─────────────────────── */
   function diasDesdeSiembra(fechaSiembra) {
-    const siembra = new Date(fechaSiembra + 'T00:00:00');
+    // La fecha llega del backend como ISO string completo (ej: "2025-03-05T00:00:00.000Z")
+    // new Date() lo parsea correctamente sin modificaciones
+    const siembra = new Date(fechaSiembra);
     const hoy     = new Date();
     hoy.setHours(0, 0, 0, 0);
     return Math.max(0, Math.floor((hoy - siembra) / 86400000));

@@ -120,8 +120,8 @@
     requireAuth();
     (async () => {
       try {
-        const _res = await CultivoService.obtener();
-        const cultivo = _res?.datos?.cultivo ?? null;
+        const { ok, datos } = await CultivoService.obtener();
+        const cultivo = (ok && datos?.cultivo) ? datos.cultivo : null;
         if (!cultivo) return;
         const { dias, etapa } = CultivoUtils.calcular(cultivo);
         document.getElementById('etapa-label').textContent =

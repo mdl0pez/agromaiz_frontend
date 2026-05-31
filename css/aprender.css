@@ -62,14 +62,13 @@
     text-decoration: none;
     color: inherit;
     box-shadow: var(--shadow-sm);
-    /* animation:both aplica el estado FROM antes de iniciar → no hay flash inicial */
-    /* transition solo actúa DESPUÉS de que la animación termina */
-    animation: slideUp .4s ease both;
-    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-    transform-origin: center center;
     position: relative;
     overflow: hidden;
     pointer-events: auto;
+    /* Entrada animada: solo opacity + translate (propiedad CSS independiente de transform) */
+    animation: slideUp .4s ease both;
+    /* Hover/active: usa transform (no interfiere con la animación de translate) */
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
 
 .learn-card:nth-child(1) { animation-delay: .05s; }
@@ -78,12 +77,12 @@
 .learn-card:nth-child(4) { animation-delay: .26s; }
 
 @keyframes slideUp {
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; translate: 0 18px; }
+    to   { opacity: 1; translate: 0 0;    }
 }
 
 /* Efectos de interacción unificados para todas las tarjetas */
 .learn-card:hover {
-    /* No tocamos animation-name. La transición toma el control una vez la animación terminó. */
     transform: translateY(-4px) scale(1.01);
     box-shadow: var(--shadow-md);
     border-color: var(--green-300);
