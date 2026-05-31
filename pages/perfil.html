@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi perfil — AgroMaíz</title>
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/app.css" />
+  <style>
+    /* ── Cabecera de perfil ── */
+    .perfil-hero {
+      background: linear-gradient(135deg, var(--green-900) 0%, var(--green-700) 100%);
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.5rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .perfil-hero::after {
+      content: '🌽';
+      position: absolute;
+      right: 1rem; bottom: -.5rem;
+      font-size: 4.5rem; opacity: .07;
+      pointer-events: none;
+    }
+    .perfil-avatar {
+      width: 76px; height: 76px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.15);
+      border: 3px solid rgba(255,255,255,.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.2rem;
+    }
+    .perfil-nombre {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      color: #fff;
+      margin: 0;
+    }
+    .perfil-email {
+      font-size: .82rem;
+      color: rgba(255,255,255,.65);
+      margin: 0;
+    }
+    .perfil-badge {
+      display: inline-flex; align-items: center; gap: .35rem;
+      background: rgba(255,255,255,.13);
+      border: 1px solid rgba(255,255,255,.2);
+      color: rgba(255,255,255,.9);
+      font-size: .72rem; font-weight: 600;
+      padding: .25rem .75rem;
+      border-radius: var(--radius-full);
+      letter-spacing: .04em;
+    }
+
+    /* ── Secciones del perfil ── */
+    .perfil-section-title {
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--text-muted, #8AA899);
+      text-transform: uppercase;
+      letter-spacing: .09em;
+      margin: 1.5rem 0 .6rem;
+    }
+
+    .perfil-item {
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      background: var(--card-bg, #fff);
+      border: 1px solid var(--card-border, #E3EDE3);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.1rem;
+      margin-bottom: .6rem;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .perfil-item::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+      background: transparent;
+      transition: background var(--transition);
+    }
+    .perfil-item:hover {
+      border-color: var(--green-300);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(0,0,0,.07);
+    }
+    .perfil-item:hover::before { background: var(--green-500); }
+
+    .pi-icon {
+      width: 40px; height: 40px;
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .pi-icon.green  { background: #e8f5e9; }
+    .pi-icon.blue   { background: #e3f2fd; }
+    .pi-icon.yellow { background: #fff8e1; }
+    .pi-icon.red    { background: #fff0f0; }
+
+    .pi-body { flex: 1; }
+    .pi-body strong {
+      display: block;
+      font-size: .92rem;
+      font-weight: 700;
+      color: var(--text-primary, #0F2318);
+      margin-bottom: 2px;
+    }
+    .pi-body span {
+      font-size: .78rem;
+      color: var(--text-secondary, #4A6356);
+    }
+    .pi-arrow { color: var(--text-muted, #8AA899); font-size: 1.2rem; }
+
+    /* Ítem de cerrar sesión */
+    .perfil-item.danger {
+      border-color: #fecaca;
+      background: #fff8f8;
+    }
+    .perfil-item.danger:hover { border-color: #fca5a5; }
+    .perfil-item.danger:hover::before { background: #ef4444; }
+    .perfil-item.danger .pi-body strong { color: #dc2626; }
+    .perfil-item.danger .pi-body span  { color: #ef9999; }
+
+    /* Tarjeta resumen del cultivo */
+    .cultivo-resumen {
+      background: linear-gradient(135deg, #f0fdf4, #f7fff9);
+      border: 1px solid #b7e4c7;
+      border-radius: var(--radius-md);
+      padding: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: .9rem;
+      margin-bottom: .6rem;
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+    .cultivo-resumen:hover { box-shadow: 0 4px 14px rgba(0,0,0,.07); }
+    .cultivo-resumen .cr-icon { font-size: 1.75rem; flex-shrink: 0; }
+    .cultivo-resumen h4 {
+      font-size: .92rem; font-weight: 700;
+      color: var(--green-900); margin-bottom: .2rem;
+    }
+    .cultivo-resumen p { font-size: .78rem; color: var(--text-secondary, #4A6356); }
+    .cultivo-resumen .cr-arrow { color: var(--green-500); font-size: 1.2rem; margin-left: auto; }
+
+    /* Sin cultivo */
+    .sin-cultivo-card {
+      background: var(--gray-50);
+      border: 1px dashed var(--gray-300);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      text-align: center;
+    }
+    .sin-cultivo-card p { font-size: .85rem; color: var(--gray-600); margin-bottom: .75rem; }
+  </style>
+</head>
+<body class="app-layout">
+
+  <div class="app-container" style="padding-bottom: 100px;">
+
+    <header class="app-header">
+      <a href="dashboard.html" class="app-header-back" aria-label="Volver">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+      </a>
+      <div class="app-header-title">👤 Mi perfil</div>
+      <div style="width:24px"></div>
+    </header>
+
+    <main>
+
+      <!-- ── Hero del perfil ── -->
+      <div class="perfil-hero">
+        <div class="perfil-avatar" id="perfil-avatar">👨‍🌾</div>
+        <h1 class="perfil-nombre" id="perfil-nombre">Cargando…</h1>
+        <p class="perfil-email"  id="perfil-email"></p>
+        <span class="perfil-badge">🌽 Agricultor AgroMaíz</span>
+      </div>
+
+      <!-- ── Mi cultivo ── -->
+      <p class="perfil-section-title">Mi cultivo</p>
+
+      <a href="mi-cultivo.html" class="cultivo-resumen" id="cultivo-card" style="display:none">
+        <span class="cr-icon" id="cultivo-emoji">🌽</span>
+        <div>
+          <h4 id="cultivo-etapa">Cargando…</h4>
+          <p  id="cultivo-detalle"></p>
+        </div>
+        <span class="cr-arrow">›</span>
+      </a>
+
+      <div class="sin-cultivo-card" id="sin-cultivo-card" style="display:none">
+        <p>No tienes un cultivo registrado todavía.</p>
+        <a href="registrar-cultivo.html" class="btn-primary"
+           style="display:inline-flex; font-size:.88rem;">
+          Registrar cultivo
+        </a>
+      </div>
+
+      <!-- ── Acciones ── -->
+      <p class="perfil-section-title">Acciones</p>
+
+      <a href="mi-cultivo.html" class="perfil-item">
+        <div class="pi-icon green">🌱</div>
+        <div class="pi-body">
+          <strong>Ver mi cultivo</strong>
+          <span>Estado actual, etapa y seguimiento</span>
+        </div>
+        <span class="pi-arrow">›</span>
+      </a>
+
+      <a href="registrar-cultivo.html" class="perfil-item">
+        <div class="pi-icon blue">✏️</div>
+        <div class="pi-body">
+          <strong>Actualizar cultivo</strong>
+          <span>Vuelve a registrar si cambiaron los datos</span>
+        </div>
+        <span class="pi-arrow">›</span>
+      </a>
+
+      <a href="asistente.html" class="perfil-item">
+        <div class="pi-icon yellow">🤖</div>
+        <div class="pi-body">
+          <strong>Consultar AgroBot</strong>
+          <span>Preguntas sobre tu cultivo con IA</span>
+        </div>
+        <span class="pi-arrow">›</span>
+      </a>
+
+      <!-- ── Cerrar sesión ── -->
+      <p class="perfil-section-title">Sesión</p>
+
+      <div class="perfil-item danger" onclick="Auth.cerrarSesion()" style="cursor:pointer">
+        <div class="pi-icon red">🚪</div>
+        <div class="pi-body">
+          <strong>Cerrar sesión</strong>
+          <span>Salir de tu cuenta en este dispositivo</span>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="dashboard.html" class="nav-item">
+      <svg viewBox="0 0 24 24" width="24" height="24" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Inicio</span>
+    </a>
+    <a href="aprender.html" class="nav-item">
+      <svg viewBox="0 0 24 24" width="24" height="24" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      <span>Aprender</span>
+    </a>
+    <a href="perfil.html" class="nav-item active">
+      <svg viewBox="0 0 24 24" width="24" height="24" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span class="usuario-nombre">Perfil</span>
+    </a>
+    <button onclick="Auth.cerrarSesion()" class="nav-item" style="background:none;border:none;cursor:pointer;">
+      <svg viewBox="0 0 24 24" width="24" height="24" stroke-width="2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      <span>Salir</span>
+    </button>
+  </nav>
+
+  <a href="asistente.html" class="chat-fab" aria-label="Abrir AgroBot">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <span class="chat-fab-pulse"></span>
+  </a>
+  <link rel="stylesheet" href="../css/asistente.css" />
+
+  <script src="../js/config.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/cultivo-utils.js"></script>
+  <script>
+    requireAuth();
+
+    const u = Auth.getUsuario();
+    if (u) {
+      // Rellenar datos del usuario
+      document.getElementById('perfil-nombre').textContent = u.nombre || 'Agricultor';
+      document.getElementById('perfil-email').textContent  = u.email  || '';
+      document.querySelectorAll('.usuario-nombre').forEach(el => el.textContent = u.nombre);
+
+      // Avatar: iniciales del nombre
+      const iniciales = (u.nombre || 'A').split(' ').map(p => p[0]).slice(0, 2).join('').toUpperCase();
+      const avatarEl  = document.getElementById('perfil-avatar');
+      avatarEl.textContent  = '';
+      avatarEl.style.cssText += `
+        background: rgba(255,255,255,.15);
+        font-family: var(--font-display);
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: .02em;
+      `;
+      avatarEl.textContent = iniciales;
+    }
+
+    // Cargar resumen del cultivo
+    (async () => {
+      try {
+        const { ok, datos } = await CultivoService.obtener();
+        const cultivo = ok && datos?.cultivo ? datos.cultivo : null;
+
+        if (cultivo) {
+          const { dias, etapa } = CultivoUtils.calcular(cultivo);
+          const lugar = [cultivo.municipio, cultivo.departamento].filter(Boolean).join(', ') || 'Ubicación no registrada';
+
+          document.getElementById('cultivo-card').style.display   = 'flex';
+          document.getElementById('cultivo-emoji').textContent    = etapa.emoji;
+          document.getElementById('cultivo-etapa').textContent    = etapa.nombre;
+          document.getElementById('cultivo-detalle').textContent  = `Día ${dias} · ${lugar}`;
+        } else {
+          document.getElementById('sin-cultivo-card').style.display = 'block';
+        }
+      } catch (_) {
+        document.getElementById('sin-cultivo-card').style.display = 'block';
+      }
+    })();
+  </script>
+</body>
+</html>

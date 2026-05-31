@@ -85,7 +85,7 @@
       <svg viewBox="0 0 24 24" width="24" height="24" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
       <span>Aprender</span>
     </a>
-    <a href="#" class="nav-item">
+    <a href="perfil.html" class="nav-item">
       <svg viewBox="0 0 24 24" width="24" height="24" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       <span class="usuario-nombre">Perfil</span>
     </a>
@@ -109,19 +109,81 @@
     const u = Auth.getUsuario();
     if (u) document.querySelectorAll('.usuario-nombre').forEach(el => el.textContent = u.nombre);
 
-    const DESTINOS = {
-      riego:         'riego.html',
-      fertilizacion: 'fertilizacion.html',
-      malezas:       'malezas.html',
-      monitoreo:     'monitoreo.html',
-    };
-
-    // Fecha de hoy inmediata (no depende del backend)
+    // Fecha de hoy
     document.getElementById('fecha-hoy').textContent = '📅 ' + CultivoUtils.fechaHoyEspanol();
+
+    // ── Las 4 tareas fijas con descripciones dinámicas por etapa ──────────
+    // Cada tarea siempre aparece y siempre enlaza a su página.
+    // Solo cambia el texto descriptivo según la etapa del cultivo.
+    const TAREAS_FIJAS = [
+      {
+        id:    'fertilizacion',
+        icon:  '🌱',
+        titulo: 'Fertilización',
+        href:  'fertilizacion.html',
+        desc: {
+          siembra:             'Aún no es momento de fertilizar. Espera a la etapa V3–V4.',
+          vegetativo_temprano: 'Primera aplicación de nitrógeno (Urea o DAP). Etapa ideal ahora.',
+          vegetativo_medio:    'Considera una segunda aplicación de nitrógeno si el cultivo lo requiere.',
+          prefloracion:        'Aplicación foliar si observas carencias nutricionales.',
+          floracion:           'No apliques fertilizantes granulados. Prioriza el riego.',
+          llenado:             'El llenado del grano ya no responde a fertilización en este ciclo.',
+          madurez:             'No se aplica fertilizante. Prepara la cosecha.',
+          _default:            'Aplica fertilizante según la etapa actual de tu cultivo.',
+        },
+      },
+      {
+        id:    'riego',
+        icon:  '💧',
+        titulo: 'Riego',
+        href:  'riego.html',
+        desc: {
+          siembra:             'Verifica que el suelo mantenga humedad suficiente para la germinación.',
+          vegetativo_temprano: 'Mantén humedad óptima para favorecer el desarrollo vegetativo.',
+          vegetativo_medio:    'Riego ligero en la tarde para mantener humedad óptima.',
+          prefloracion:        'Agua abundante antes de la floración. No dejes secar el suelo.',
+          floracion:           'La floración requiere máxima disponibilidad de agua. Riega a diario.',
+          llenado:             'Mantén humedad para maximizar el llenado del grano.',
+          madurez:             'Reduce el riego gradualmente. El grano está completando su madurez.',
+          _default:            'Riega según la etapa y el tipo de suelo registrado.',
+        },
+      },
+      {
+        id:    'monitoreo',
+        icon:  '🔍',
+        titulo: 'Monitoreo de plagas',
+        href:  'monitoreo.html',
+        desc: {
+          siembra:             'Comprueba que el porcentaje de emergencia sea superior al 85%.',
+          vegetativo_temprano: 'Revisa hojas inferiores en busca de gusano cogollero o pulgones.',
+          vegetativo_medio:    'Revisar hojas inferiores en busca de plagas comunes.',
+          prefloracion:        'Inspección de plagas que puedan afectar las espigas.',
+          floracion:           'Plagas que dañen las espigas o sedas afectan el rendimiento.',
+          llenado:             'Inspecciona mazorcas por hongos o daño de insectos.',
+          madurez:             'Verifica el punto negro del grano y el nivel de humedad (≤25%).',
+          _default:            'Inspecciona el cultivo para detectar plagas o enfermedades.',
+        },
+      },
+      {
+        id:    'malezas',
+        icon:  '🌿',
+        titulo: 'Revisión de malezas',
+        href:  'malezas.html',
+        desc: {
+          siembra:             'Elimina malezas antes de que compitan con las plántulas emergentes.',
+          vegetativo_temprano: 'Controla malezas antes de que superen 10 cm de altura.',
+          vegetativo_medio:    'Verifica presencia de malezas y controlarlas si es necesario.',
+          prefloracion:        'Elimina malezas que compitan por agua y nutrientes antes de florecer.',
+          floracion:           'Mantén el área limpia para no interferir con la polinización.',
+          llenado:             'Controla malezas tardías que puedan dificultar la cosecha.',
+          madurez:             'Despeja el área para facilitar la entrada de maquinaria de cosecha.',
+          _default:            'Revisa y controla malezas según el estado del cultivo.',
+        },
+      },
+    ];
 
     (async () => {
       try {
-        // Patrón correcto igual que mi-cultivo.html y aprender-etapas.html
         const { ok, datos } = await CultivoService.obtener();
         const cultivo = (ok && datos?.cultivo) ? datos.cultivo : null;
 
@@ -136,9 +198,9 @@
         const { dias, etapa } = CultivoUtils.calcular(cultivo);
 
         // Badge de etapa
-        document.getElementById('etapa-badge').style.display     = 'block';
-        document.getElementById('etapa-badge-text').textContent  = `${etapa.emoji} ${etapa.nombre}`;
-        document.getElementById('dias-badge').textContent        = `· Día ${dias} desde siembra`;
+        document.getElementById('etapa-badge').style.display    = 'block';
+        document.getElementById('etapa-badge-text').textContent = `${etapa.emoji} ${etapa.nombre}`;
+        document.getElementById('dias-badge').textContent       = `· Día ${dias} desde siembra`;
 
         // Recomendación principal
         document.getElementById('rec-icon').textContent  = etapa.emoji;
@@ -149,41 +211,20 @@
         document.getElementById('etapa-desc').innerHTML   =
           `${etapa.nombre}<br>(${etapa.codigo} — día ${dias})`;
 
-        // ── Descripción de fertilización según etapa ────────
-        const FERTI_DESC = {
-          siembra:            'Aún no es momento de fertilizar. Espera a la etapa V3–V4.',
-          vegetativo_temprano:'Primera aplicación de nitrógeno (Urea o DAP). Etapa ideal ahora.',
-          vegetativo_medio:   'Considera una segunda aplicación de nitrógeno si el cultivo lo requiere.',
-          prefloracion:       'Aplicación foliar si observas carencias nutricionales antes de la floración.',
-          floracion:          'No apliques fertilizantes granulados en floración. Prioriza el riego.',
-          llenado:            'El llenado del grano ya no responde a fertilización en este ciclo.',
-          madurez:            'No se aplica fertilizante. Prepara la cosecha.',
-        };
-
-        // Fertilización: siempre visible, descripción dinámica
+        // ── Renderizar las 4 tareas fijas ──────────────────
         const lista = document.getElementById('tareas-lista');
-        const fertiEl = document.createElement('a');
-        fertiEl.href      = 'fertilizacion.html';
-        fertiEl.className = 'task-item';
-        fertiEl.innerHTML = `
-          <div class="icon">🌱</div>
-          <div class="content">
-            <h4>Fertilización</h4>
-            <p>${FERTI_DESC[etapa.id] || 'Aplica fertilizante según la etapa actual de tu cultivo.'}</p>
-          </div>
-          <div class="task-arrow">›</div>`;
-        lista.appendChild(fertiEl);
+        lista.innerHTML = ''; // limpiar por si se recarga
 
-        // Resto de tareas dinámicas (excluyendo fertilizacion para no duplicar)
-        etapa.tareas.filter(t => t.id !== 'fertilizacion').forEach(t => {
-          const el     = document.createElement('a');
-          el.href      = DESTINOS[t.id] || '#';
+        TAREAS_FIJAS.forEach(tarea => {
+          const desc = tarea.desc[etapa.id] || tarea.desc._default;
+          const el   = document.createElement('a');
+          el.href      = tarea.href;
           el.className = 'task-item';
           el.innerHTML = `
-            <div class="icon">${t.icon}</div>
+            <div class="icon">${tarea.icon}</div>
             <div class="content">
-              <h4>${t.titulo}</h4>
-              <p>${t.desc}</p>
+              <h4>${tarea.titulo}</h4>
+              <p>${desc}</p>
             </div>
             <div class="task-arrow">›</div>`;
           lista.appendChild(el);
