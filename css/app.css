@@ -333,6 +333,9 @@ box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
   cursor: pointer; transition: var(--transition);
   text-decoration: none; color: inherit;
   position: relative; overflow: hidden;
+  /* Necesario cuando el elemento es <a> (inline por defecto) */
+  width: 100%;
+  box-sizing: border-box;
 }
 .task-item::before {
   content: '';

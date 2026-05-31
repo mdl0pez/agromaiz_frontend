@@ -123,7 +123,16 @@ window.CultivoUtils = (function () {
       if (dias >= e.diasMin && dias <= e.diasMax) return e;
     }
     // Más de 130 días: post-cosecha
-    if (dias > 130) return { ...ETAPAS[ETAPAS.length - 1], nombre: 'Post-cosecha / Próximo ciclo', emoji: '✅' };
+    if (dias > 130) return {
+      ...ETAPAS[ETAPAS.length - 1],
+      nombre: 'Post-cosecha / Próximo ciclo',
+      emoji: '✅',
+      recomendacion_principal: 'El ciclo ha concluido. Evalúa el rendimiento y planifica el próximo ciclo de siembra.',
+      tareas: [
+        { id: 'monitoreo', icon: '🔍', titulo: 'Evaluación de cosecha',   desc: 'Verifica el punto negro del grano y el nivel de humedad (≤25%).' },
+        { id: 'monitoreo', icon: '📋', titulo: 'Registro de rendimiento', desc: 'Anota el rendimiento obtenido para planificar el próximo ciclo.' },
+      ],
+    };
     return ETAPAS[0];
   }
 
