@@ -103,7 +103,8 @@
 
     (async () => {
       try {
-        const { cultivo } = await CultivoService.obtener();
+        const _res = await CultivoService.obtener();
+        const cultivo = _res?.datos?.cultivo ?? null;
         if (!cultivo) return;
         const { etapa } = CultivoUtils.calcular(cultivo);
         const msg = MENSAJES_ETAPA[etapa.id] || MENSAJES_ETAPA.vegetativo_temprano;
